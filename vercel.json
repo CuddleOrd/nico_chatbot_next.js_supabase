@@ -6,7 +6,7 @@
     }
   ],
   "functions": {
-    "app/api/cron/*": {
+    "app/api/cron/15-min/*": {
       "maxDuration": 60
     }
   }
