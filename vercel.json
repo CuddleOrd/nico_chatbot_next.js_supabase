@@ -4,5 +4,10 @@
       "path": "/api/cron/15-min",
       "schedule": "0 0 * * *"
     }
-  ]
+  ],
+  "functions": {
+    "api/cron/15-min/route.ts": {
+      "maxDuration": 60
+    }
+  }
 }
