@@ -33,8 +33,8 @@ export function Brand({ className }: BrandProps) {
   return (
     <Link href="/" className={className}>
       <div className="flex items-center gap-2">
-        <Logo width={32} />
-        <span className="text-x select-none font-bold">Neur</span>
+        {/* <Logo width={32} /> */}
+        <span className="text-x select-none font-bold">Ai99x</span>
       </div>
     </Link>
   );

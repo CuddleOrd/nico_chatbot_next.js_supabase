@@ -243,14 +243,6 @@ export function HomeContent() {
       </BlurFade>
 
       <div className="mx-auto w-full max-w-3xl space-y-8">
-        <BlurFade delay={0.1}>
-          <ConversationInput
-            value={input}
-            onChange={setInput}
-            onSubmit={handleSend}
-          />
-        </BlurFade>
-
         {hasEAP && (
           <div className="space-y-8">
             <BlurFade delay={0.2}>
@@ -277,6 +269,14 @@ export function HomeContent() {
             </BlurFade>
           </div>
         )}
+
+        <BlurFade delay={0.1}>
+          <ConversationInput
+            value={input}
+            onChange={setInput}
+            onSubmit={handleSend}
+          />
+        </BlurFade>
       </div>
     </div>
   );

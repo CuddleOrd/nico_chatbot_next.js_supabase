@@ -21,7 +21,7 @@ export type PrismaUser = _PrismaUser & {
   wallets: EmbeddedWallet[];
 };
 
-export type NeurUser = Pick<
+export type Ai99xUser = Pick<
   PrismaUser,
   'id' | 'privyId' | 'createdAt' | 'updatedAt' | 'earlyAccess' | 'wallets'
 > & {

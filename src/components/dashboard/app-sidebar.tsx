@@ -28,7 +28,7 @@ const AppSidebarHeader = () => {
     <SidebarHeader>
       <div className="flex items-center justify-between px-1">
         <span className="pl-2 text-lg font-medium tracking-tight group-data-[collapsible=icon]:hidden">
-          neur.sh
+          ai99x.com
         </span>
         <div className="flex items-center gap-1.5">
           <ThemeToggle />
@@ -66,7 +66,7 @@ const ExploreItems = [
   },
   {
     title: 'Docs',
-    url: 'https://docs.neur.sh',
+    url: 'https://docs.ai99x.com',
     segment: 'docs',
     icon: BookOpen,
     external: true,
