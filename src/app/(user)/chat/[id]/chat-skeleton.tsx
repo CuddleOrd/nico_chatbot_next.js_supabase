@@ -25,7 +25,7 @@ function MessagePair({ isFirst = false }: { isFirst?: boolean }) {
       {/* User Message */}
       <div className="flex w-full flex-row-reverse items-start gap-3">
         <div className="relative flex max-w-[85%] flex-col items-end gap-2">
-          <div className="relative flex flex-col gap-2 rounded-2xl bg-primary px-4 py-3 text-sm shadow-sm">
+          <div className="relative flex flex-col gap-2 rounded-md bg-primary px-4 py-3 text-sm shadow-sm">
             <div
               className="animate-pulse bg-primary"
               style={{
@@ -45,7 +45,7 @@ function MessagePair({ isFirst = false }: { isFirst?: boolean }) {
           <AvatarFallback></AvatarFallback>
         </Avatar>
         <div className="relative flex max-w-[85%] flex-col gap-2">
-          <div className="relative flex flex-col gap-2 rounded-2xl bg-muted/60 px-4 py-3 text-sm shadow-sm">
+          <div className="relative flex flex-col gap-2 rounded-md bg-muted/60 px-4 py-3 text-sm shadow-sm">
             <div
               className="animate-pulse bg-muted/60"
               style={{
@@ -90,7 +90,7 @@ export function ChatSkeleton() {
         <div className="relative mx-auto w-full max-w-3xl px-4 py-4">
           <div className="space-y-4">
             {/* Message input box */}
-            <div className="relative overflow-hidden rounded-2xl bg-muted">
+            <div className="relative overflow-hidden rounded-md bg-muted">
               <div className="min-h-[100px] w-full animate-pulse resize-none border-0 bg-transparent px-4 py-[1.3rem]" />
 
               {/* Action buttons */}

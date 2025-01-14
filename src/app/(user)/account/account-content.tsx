@@ -2,15 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
-import {
-  Discord,
-  OAuthTokens,
-  Twitter,
-  User,
-  useOAuthTokens,
-} from '@privy-io/react-auth';
+import { Discord, Twitter } from '@privy-io/react-auth';
 
-import { WalletCard } from '@/components/dashboard/wallet-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -24,8 +17,6 @@ import {
   formatUserCreationDate,
   formatWalletAddress,
 } from '@/lib/utils/format';
-import { getUserID, grantDiscordRole } from '@/lib/utils/grant-discord-role';
-import { EmbeddedWallet } from '@/types/db';
 
 import { LoadingStateSkeleton } from './loading-skeleton';
 
@@ -41,13 +32,6 @@ export function AccountContent() {
     linkDiscord,
     unlinkDiscord,
   } = useUser();
-
-  const { reauthorize } = useOAuthTokens({
-    onOAuthTokenGrant: (tokens: OAuthTokens, { user }: { user: User }) => {
-      // Grant Discord role
-      handleGrantDiscordRole(tokens.accessToken);
-    },
-  });
 
   if (isLoading || !user) {
     return <LoadingStateSkeleton />;
@@ -65,25 +49,14 @@ export function AccountContent() {
     discord: privyUser?.discord as Discord | undefined,
   };
 
-  const wallets = user?.wallets || [];
   const avatarLabel = userData.walletAddress
     ? userData.walletAddress.substring(0, 2).toUpperCase()
     : '?';
 
-  const handleGrantDiscordRole = async (accessToken: string) => {
-    try {
-      const discordUserId = await getUserID(accessToken);
-      await grantDiscordRole(discordUserId);
-    } catch (error) {
-      throw new Error(`Failed to grant Discord role: ${error}`);
-    }
-  };
-
   return (
     <div className="flex flex-1 flex-col py-8">
       <div className="w-full px-8">
-        <div className="max-w-3xl space-y-6">
-          {/* Profile Information Section */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <section className="space-y-4">
             <h2 className="text-sm font-medium text-muted-foreground">
               Profile Information
@@ -92,17 +65,7 @@ export function AccountContent() {
             <Card className="bg-sidebar">
               <CardContent className="pt-6">
                 <div className="space-y-4">
-                  {/* User basic information */}
                   <div className="flex items-center space-x-4">
-                    <Avatar className="h-10 w-10 rounded-lg">
-                      <AvatarImage
-                        src={userData.twitter?.profilePictureUrl || undefined}
-                        className="rounded-lg object-cover"
-                      />
-                      <AvatarFallback className="rounded-lg bg-sidebar-accent">
-                        {avatarLabel}
-                      </AvatarFallback>
-                    </Avatar>
                     <div>
                       <p className="text-sm font-medium">
                         {userData.twitter
@@ -294,16 +257,6 @@ export function AccountContent() {
                 </div>
               </CardContent>
             </Card>
-          </section>
-
-          {/* Embedded Wallet Section */}
-          <section className="space-y-4">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              Embedded Wallet
-            </h2>
-            {wallets?.map((wallet: EmbeddedWallet) => (
-              <WalletCard key={wallet.id} wallet={wallet} />
-            ))}
           </section>
         </div>
       </div>

@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { SendHorizontal } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { BorderBeam } from '@/components/ui/border-beam';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -54,7 +53,7 @@ export function ConversationInput({
 
   return (
     <div className="relative duration-500 animate-in fade-in slide-in-from-bottom-4">
-      <div className="relative rounded-xl bg-muted">
+      <div className="relative rounded-md bg-muted shadow-sm shadow-black/40">
         <form onSubmit={handleSubmit} className="flex flex-col">
           <Textarea
             ref={textareaRef}
@@ -89,8 +88,6 @@ export function ConversationInput({
             </Button>
           </div>
         </form>
-
-        <BorderBeam size={250} duration={8} delay={9} />
       </div>
     </div>
   );

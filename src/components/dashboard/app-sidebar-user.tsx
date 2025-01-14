@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 
-import { RiTwitterXFill } from '@remixicon/react';
-import { BookOpen, ChevronsUpDown, HelpCircle, Settings } from 'lucide-react';
+import { ChevronsUpDown, Settings } from 'lucide-react';
 import { LogOut } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -33,7 +32,6 @@ export const AppSidebarUser = () => {
   const label = privyUser?.wallet
     ? privyUser.wallet.address.substring(0, 5)
     : privyUser?.email?.address;
-  const subLabel = privyUser?.id?.substring(10);
   const twitter = privyUser?.twitter;
   const twitterUsername = twitter?.username;
   const twitterProfileImage = twitter?.profilePictureUrl;
@@ -70,9 +68,6 @@ export const AppSidebarUser = () => {
                   <span className="truncate font-semibold">
                     {twitterUsername ? `@${twitterUsername}` : label}
                   </span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    {subLabel}
-                  </span>
                 </div>
                 <ChevronsUpDown className="ml-auto size-4" />
               </SidebarMenuButton>
@@ -85,31 +80,6 @@ export const AppSidebarUser = () => {
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              {/* Follow us on X */}
-              <DropdownMenuItem
-                onClick={() => window.open('https://x.com/neur_sh', '_blank')}
-              >
-                <RiTwitterXFill className="mr-2 h-4 w-4" />
-                Follow us on X
-              </DropdownMenuItem>
-
-              {/* FAQ */}
-              <Link href="/faq">
-                <DropdownMenuItem>
-                  <HelpCircle className="mr-2 h-4 w-4" />
-                  FAQ
-                </DropdownMenuItem>
-              </Link>
-
-              {/* Docs */}
-              <DropdownMenuItem
-                onClick={() => window.open('https://docs.ai99x.com', '_blank')}
-              >
-                <BookOpen className="mr-2 h-4 w-4" />
-                Docs
-              </DropdownMenuItem>
-
-              {/* Account */}
               <Link href="/account">
                 <DropdownMenuItem>
                   <Settings className="mr-2 h-4 w-4" />

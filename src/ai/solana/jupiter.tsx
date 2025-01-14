@@ -20,7 +20,7 @@ interface JupiterToken {
 
 function TokenCard({ token }: { token: JupiterToken }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-muted/50 p-4">
+    <div className="relative overflow-hidden rounded-md bg-muted/50 p-4">
       <div className="flex items-center gap-3">
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl">
           <Image
@@ -74,7 +74,7 @@ function PriceCard({
       : formatNumber(priceValue, 'number');
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-muted/50 p-4">
+    <div className="relative overflow-hidden rounded-md bg-muted/50 p-4">
       <div className="flex items-center gap-3">
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl">
           <Image
@@ -162,7 +162,7 @@ export const jupiterTools = {
 
       if (!typedResult.success) {
         return (
-          <div className="relative overflow-hidden rounded-2xl bg-destructive/5 p-4">
+          <div className="relative overflow-hidden rounded-md bg-destructive/5 p-4">
             <div className="flex items-center gap-3">
               <p className="text-sm text-destructive">
                 Error: {typedResult.error}
@@ -174,7 +174,7 @@ export const jupiterTools = {
 
       if (!typedResult.data?.length) {
         return (
-          <div className="relative overflow-hidden rounded-2xl bg-muted/50 p-4">
+          <div className="relative overflow-hidden rounded-md bg-muted/50 p-4">
             <div className="flex items-center gap-3">
               <p className="text-sm text-muted-foreground">No tokens found</p>
             </div>
@@ -259,7 +259,7 @@ export const jupiterTools = {
 
       if (!typedResult.success) {
         return (
-          <div className="relative overflow-hidden rounded-2xl bg-destructive/5 p-4">
+          <div className="relative overflow-hidden rounded-md bg-destructive/5 p-4">
             <div className="flex items-center gap-3">
               <p className="text-sm text-destructive">
                 Error: {typedResult.error}
@@ -271,7 +271,7 @@ export const jupiterTools = {
 
       if (!typedResult.data) {
         return (
-          <div className="relative overflow-hidden rounded-2xl bg-muted/50 p-4">
+          <div className="relative overflow-hidden rounded-md bg-muted/50 p-4">
             <div className="flex items-center gap-3">
               <p className="text-sm text-muted-foreground">
                 No price data available

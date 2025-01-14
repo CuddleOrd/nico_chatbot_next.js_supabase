@@ -19,7 +19,7 @@ export const utilTools = {
       const result = raw as { data: { message: string } };
 
       return (
-        <div className="relative overflow-hidden rounded-2xl bg-muted/50 p-4">
+        <div className="relative overflow-hidden rounded-md bg-muted/50 p-4">
           <div className="flex items-center gap-3">
             <p className="text-sm text-muted-foreground">
               {result.data.message}

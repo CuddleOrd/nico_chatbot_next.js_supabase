@@ -24,7 +24,7 @@ export function SuggestionCard({
       }}
       whileTap={{ scale: 0.99 }}
       onClick={() => onSelect(title)}
-      className="flex flex-col gap-1.5 rounded-xl bg-muted/50 p-3.5 text-left 
+      className="flex flex-col gap-1.5 rounded-md bg-muted/50 p-3.5 text-left shadow-sm shadow-black/40 
         transition-colors duration-200 hover:bg-primary/5"
     >
       <div className="text-sm font-medium">{title}</div>

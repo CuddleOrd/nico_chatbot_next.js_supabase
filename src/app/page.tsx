@@ -15,11 +15,11 @@ import {
   BookOpenIcon,
   BrainCircuitIcon,
   LinkIcon,
-  ShieldIcon,
   ZapIcon,
 } from 'lucide-react';
 
 import { Brand } from '@/components/logo';
+import PageLoading from '@/components/page-loading';
 import { AiParticlesBackground } from '@/components/ui/ai-particles-background';
 import AnimatedShinyText from '@/components/ui/animated-shiny-text';
 import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
@@ -204,7 +204,7 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
               }}
               className="relative mx-auto w-full max-w-[1200px] will-change-transform"
             >
-              <div className="group relative overflow-hidden rounded-2xl border bg-card shadow-2xl">
+              <div className="group relative overflow-hidden rounded-md border bg-card shadow-2xl">
                 {/* Light mode image */}
                 <div className="relative dark:hidden">
                   <Image
@@ -212,7 +212,7 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
                     alt="Neur AI Interface"
                     width={1200}
                     height={675}
-                    className="w-full rounded-2xl"
+                    className="w-full rounded-md"
                     priority
                   />
                 </div>
@@ -223,7 +223,7 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
                     alt="Neur AI Interface"
                     width={1200}
                     height={675}
-                    className="w-full rounded-2xl"
+                    className="w-full rounded-md"
                     priority
                   />
                 </div>
@@ -339,7 +339,7 @@ const Features = () => {
               key={idx}
               {...feature}
               className={cn(
-                'group relative overflow-hidden rounded-2xl border bg-card p-4 shadow-lg transition-all hover:shadow-xl sm:rounded-3xl sm:p-6',
+                'group relative overflow-hidden rounded-md border bg-card p-4 shadow-lg transition-all hover:shadow-xl sm:rounded-3xl sm:p-6',
                 feature.className,
               )}
             />

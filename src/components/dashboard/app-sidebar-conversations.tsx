@@ -187,7 +187,7 @@ export const AppSidebarConversations = () => {
   if (isUserLoading) {
     return (
       <SidebarGroup>
-        <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+        <SidebarGroupLabel>Histories</SidebarGroupLabel>
         <div className="flex items-center justify-center">
           <Loader2 className="mt-4 h-4 w-4 animate-spin" />
         </div>
@@ -197,7 +197,7 @@ export const AppSidebarConversations = () => {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+      <SidebarGroupLabel>Histories</SidebarGroupLabel>
       <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
         {isConversationsLoading ? (
           <div className="flex items-center justify-center">

@@ -84,7 +84,7 @@ const TokenSearchResult = ({
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-2xl bg-muted/50 p-4',
+        'relative overflow-hidden rounded-md bg-muted/50 p-4',
         className,
       )}
     >
@@ -140,7 +140,7 @@ const SwapResult = ({ result }: { result: SwapResult }) => {
     return (
       <div
         className={cn(
-          'relative overflow-hidden rounded-2xl bg-destructive/5 p-4',
+          'relative overflow-hidden rounded-md bg-destructive/5 p-4',
         )}
       >
         <div className="flex items-center gap-3">
@@ -159,7 +159,7 @@ const SwapResult = ({ result }: { result: SwapResult }) => {
   }
 
   return (
-    <div className={cn('relative overflow-hidden rounded-2xl bg-muted/50 p-4')}>
+    <div className={cn('relative overflow-hidden rounded-md bg-muted/50 p-4')}>
       <div className="flex items-center gap-3">
         <div className="rounded-xl bg-muted p-2.5">
           <ArrowRightLeft className="h-5 w-5 text-muted-foreground" />

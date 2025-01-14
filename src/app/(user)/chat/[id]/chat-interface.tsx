@@ -266,7 +266,7 @@ function ChatMessage({
       )}
     >
       {showAvatar ? (
-        <Avatar className="mt-0.5 h-8 w-8 shrink-0 select-none">
+        <Avatar className="mt-0.5 h-9 w-9 shrink-0 select-none border border-gray-500 bg-muted shadow-sm shadow-black">
           <Logo />
           <AvatarFallback>AI</AvatarFallback>
         </Avatar>
@@ -295,7 +295,7 @@ function ChatMessage({
         {message.content && (
           <div
             className={cn(
-              'relative flex flex-col gap-2 rounded-2xl px-4 py-3 text-sm shadow-sm',
+              'relative flex flex-col gap-2 rounded-md px-4 py-3 text-sm shadow-sm shadow-black/60',
               isUser ? 'bg-primary text-primary-foreground' : 'bg-muted/60',
             )}
           >
@@ -473,7 +473,7 @@ function LoadingMessage() {
       </Avatar>
 
       <div className="relative flex max-w-[85%] flex-col items-start gap-2">
-        <div className="relative flex flex-col gap-2 rounded-2xl bg-muted/60 px-4 py-3 text-sm shadow-sm">
+        <div className="relative flex flex-col gap-2 rounded-md bg-muted/60 px-4 py-3 text-sm shadow-sm">
           <div className="flex items-center gap-1">
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-foreground/50 [animation-delay:-0.3s]" />
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-foreground/50 [animation-delay:-0.15s]" />
@@ -655,14 +655,14 @@ export default function ChatInterface({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background via-background/95 to-background/0" />
         <div className="relative mx-auto w-full max-w-3xl px-4 py-4">
           {/* Floating Wallet */}
-          {portfolio && (
+          {/* {portfolio && (
             <FloatingWallet data={portfolio} isLoading={isPortfolioLoading} />
-          )}
+          )} */}
 
           <form onSubmit={handleFormSubmit} className="space-y-4">
-            <div className="relative overflow-hidden rounded-2xl bg-muted">
+            <div className="relative overflow-hidden rounded-md bg-muted shadow-sm shadow-black/60">
               {attachments.length > 0 && (
-                <div className="flex gap-2 overflow-x-auto rounded-t-2xl bg-muted/50 p-3">
+                <div className="flex gap-2 overflow-x-auto rounded-t-md bg-muted/50 p-3">
                   {attachments.map((attachment) => (
                     <AttachmentPreview
                       key={attachment.localUrl}
@@ -695,7 +695,7 @@ export default function ChatInterface({
                 placeholder="Send a message..."
                 className={cn(
                   'min-h-[100px] w-full resize-none border-0 bg-transparent px-4 py-[1.3rem] focus-visible:ring-0',
-                  attachments.length > 0 ? 'rounded-t-none' : 'rounded-t-2xl',
+                  attachments.length > 0 ? 'rounded-t-none' : 'rounded-t-md',
                 )}
                 maxLength={MAX_CHARS}
               />
