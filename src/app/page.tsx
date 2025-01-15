@@ -32,7 +32,7 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { label: 'Github', href: 'https://git.new/neur', icon: GitHubLogoIcon },
-  { label: 'Docs', href: 'https://docs.ai99x.com', icon: BookOpenIcon },
+  { label: 'Docs', href: 'https://docs.austin.com', icon: BookOpenIcon },
 ];
 
 const Header = ({ handleLogin }: { handleLogin: () => void }) => {

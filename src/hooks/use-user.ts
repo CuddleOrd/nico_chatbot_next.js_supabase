@@ -9,24 +9,24 @@ import useSWR from 'swr';
 
 import { debugLog } from '@/lib/debug';
 import { getUserData } from '@/server/actions/user';
-import { Ai99xUser, PrismaUser, PrivyUser } from '@/types/db';
+import { AustinUser, PrismaUser, PrivyUser } from '@/types/db';
 
 /**
- * Extended interface for Ai99xUser that includes Privy functionality
+ * Extended interface for AustinUser that includes Privy functionality
  * Omits 'user' and 'ready' from PrivyInterface to avoid conflicts
  */
-type Ai99xUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
+type AustinUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
   isLoading: boolean;
-  user: Ai99xUser | null;
+  user: AustinUser | null;
 };
 
 /**
- * Loads cached Ai99xUser data from localStorage
- * @returns {Ai99xUser | null} Cached user data or null if not found/invalid
+ * Loads cached AustinUser data from localStorage
+ * @returns {AustinUser | null} Cached user data or null if not found/invalid
  */
-function loadFromCache(): Ai99xUser | null {
+function loadFromCache(): AustinUser | null {
   try {
-    const cached = localStorage.getItem('ai99x-user-data');
+    const cached = localStorage.getItem('austin-user-data');
     if (cached) {
       debugLog('Loading user data from cache', cached, {
         module: 'useUser',
@@ -49,19 +49,19 @@ function loadFromCache(): Ai99xUser | null {
 }
 
 /**
- * Saves Ai99xUser data to localStorage
- * @param {Ai99xUser | null} data User data to cache or null to clear cache
+ * Saves AustinUser data to localStorage
+ * @param {AustinUser | null} data User data to cache or null to clear cache
  */
-function saveToCache(data: Ai99xUser | null) {
+function saveToCache(data: AustinUser | null) {
   try {
     if (data) {
-      localStorage.setItem('ai99x-user-data', JSON.stringify(data));
+      localStorage.setItem('austin-user-data', JSON.stringify(data));
       debugLog('User data saved to cache', data, {
         module: 'useUser',
         level: 'info',
       });
     } else {
-      localStorage.removeItem('ai99x-user-data');
+      localStorage.removeItem('austin-user-data');
       debugLog('User data removed from cache', null, {
         module: 'useUser',
         level: 'info',
@@ -76,13 +76,13 @@ function saveToCache(data: Ai99xUser | null) {
 }
 
 /**
- * Fetches Ai99xUser data from the server
+ * Fetches AustinUser data from the server
  * @param {PrivyUser} privyUser The authenticated Privy user
- * @returns {Promise<Ai99xUser | null>} User data or null if fetch fails
+ * @returns {Promise<AustinUser | null>} User data or null if fetch fails
  */
-async function fetchAi99xUserData(
+async function fetchAustinUserData(
   privyUser: PrivyUser,
-): Promise<Ai99xUser | null> {
+): Promise<AustinUser | null> {
   try {
     const response = await getUserData();
     if (response?.data?.success && response?.data?.data) {
@@ -94,7 +94,7 @@ async function fetchAi99xUserData(
       return {
         ...prismaUser,
         privyUser: privyUser as PrivyUser,
-      } as Ai99xUser;
+      } as AustinUser;
     }
     debugLog(
       'Server returned unsuccessful user data response',
@@ -115,13 +115,13 @@ async function fetchAi99xUserData(
 }
 
 /**
- * Custom hook for managing Ai99xUser data fetching, caching, and synchronization
+ * Custom hook for managing AustinUser data fetching, caching, and synchronization
  * Combines Privy authentication with our user data management system
- * @returns {Ai99xUserInterface} Object containing user data, loading state, and Privy interface methods
+ * @returns {AustinUserInterface} Object containing user data, loading state, and Privy interface methods
  */
-export function useUser(): Ai99xUserInterface {
+export function useUser(): AustinUserInterface {
   const { ready, user: privyUser, ...privyRest } = usePrivy();
-  const [initialCachedUser, setInitialCachedUser] = useState<Ai99xUser | null>(
+  const [initialCachedUser, setInitialCachedUser] = useState<AustinUser | null>(
     null,
   );
   const router = useRouter();
@@ -138,9 +138,9 @@ export function useUser(): Ai99xUserInterface {
 
   /**
    * SWR fetcher function that combines server data with Privy user data
-   * @returns {Promise<Ai99xUser | null>} Combined user data or null
+   * @returns {Promise<AustinUser | null>} Combined user data or null
    */
-  const fetcher = useCallback(async (): Promise<Ai99xUser | null> => {
+  const fetcher = useCallback(async (): Promise<AustinUser | null> => {
     if (!ready || !privyUser) {
       debugLog('Privy not ready or user not logged in', null, {
         module: 'useUser',
@@ -150,18 +150,18 @@ export function useUser(): Ai99xUserInterface {
     }
 
     if (privyUser) {
-      debugLog('Fetching Ai99xUser data from server', null, {
+      debugLog('Fetching AustinUser data from server', null, {
         module: 'useUser',
         level: 'info',
       });
-      const ai99xUser = await fetchAi99xUserData(privyUser as PrivyUser);
-      debugLog('Merged Ai99xUser data', ai99xUser, {
+      const austinUser = await fetchAustinUserData(privyUser as PrivyUser);
+      debugLog('Merged AustinUser data', austinUser, {
         module: 'useUser',
         level: 'info',
       });
-      return ai99xUser;
+      return austinUser;
     }
-    debugLog('No valid Ai99xUser data retrieved', null, {
+    debugLog('No valid AustinUser data retrieved', null, {
       module: 'useUser',
       level: 'warn',
     });
@@ -169,22 +169,22 @@ export function useUser(): Ai99xUserInterface {
   }, [ready, privyUser]);
 
   // Use SWR for data fetching and state management
-  const { data: ai99xUser, isValidating: swrLoading } =
-    useSWR<Ai99xUser | null>(swrKey, fetcher, {
+  const { data: austinUser, isValidating: swrLoading } =
+    useSWR<AustinUser | null>(swrKey, fetcher, {
       fallbackData: initialCachedUser,
       revalidateOnFocus: false,
       shouldRetryOnError: false,
     });
 
-  debugLog('Current Ai99xUser data', ai99xUser, { module: 'useUser' });
+  debugLog('Current AustinUser data', austinUser, { module: 'useUser' });
   debugLog('SWR validation status', swrLoading, { module: 'useUser' });
 
   // Update cache when new user data is fetched
   useEffect(() => {
-    if (ai99xUser) {
-      saveToCache(ai99xUser);
+    if (austinUser) {
+      saveToCache(austinUser);
     }
-  }, [ai99xUser]);
+  }, [austinUser]);
 
   const isLoading = swrLoading && !initialCachedUser;
   debugLog('Loading state', { isLoading }, { module: 'useUser' });
@@ -220,8 +220,8 @@ export function useUser(): Ai99xUserInterface {
 
   return {
     ...privyRest,
-    isLoading: isLoading || ai99xUser == null,
-    user: ai99xUser || null,
+    isLoading: isLoading || austinUser == null,
+    user: austinUser || null,
     logout: extendedLogout,
   };
 }

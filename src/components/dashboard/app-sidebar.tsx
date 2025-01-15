@@ -26,7 +26,7 @@ const AppSidebarHeader = () => {
     <SidebarHeader>
       <div className="flex items-center justify-between px-1">
         <span className="pl-2 text-lg font-medium tracking-tight group-data-[collapsible=icon]:hidden">
-          Ai99x.com
+          Austin.com
         </span>
       </div>
     </SidebarHeader>

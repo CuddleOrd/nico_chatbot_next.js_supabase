@@ -36,7 +36,7 @@ export const SUGGESTIONS: Suggestion[] = [
     subtitle: 'check the portfolio of your wallet',
   },
   // {
-  //   id: 'sell-everything-buy-ai99x',
+  //   id: 'sell-everything-buy-austin',
   //   title: 'Sell everything and buy $NEUR',
   //   subtitle: 'swap all your tokens for $NEUR',
   // },
