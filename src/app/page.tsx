@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 
 import { Brand } from '@/components/logo';
-import PageLoading from '@/components/page-loading';
 import { AiParticlesBackground } from '@/components/ui/ai-particles-background';
 import AnimatedShinyText from '@/components/ui/animated-shiny-text';
 import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';

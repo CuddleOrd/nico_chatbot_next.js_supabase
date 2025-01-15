@@ -1,15 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
-import {
-  Discord,
-  OAuthTokens,
-  Twitter,
-  User,
-  useOAuthTokens,
-} from '@privy-io/react-auth';
-
 import { WalletCard } from '@/components/dashboard/wallet-card';
 import { useUser } from '@/hooks/use-user';
 import { EmbeddedWallet } from '@/types/db';

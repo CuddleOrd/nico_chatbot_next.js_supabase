@@ -100,13 +100,14 @@ const ConversationMenuItem = ({
   };
 
   return (
-    <>
+    <div className="relative">
       <SidebarMenuItem>
         <SidebarMenuButton asChild isActive={active}>
           <Link href={`/chat/${id}`}>
             <span>{title}</span>
           </Link>
         </SidebarMenuButton>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuAction>
@@ -159,7 +160,7 @@ const ConversationMenuItem = ({
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 };
 
@@ -198,7 +199,7 @@ export const AppSidebarConversations = () => {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Histories</SidebarGroupLabel>
-      <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupContent>
         {isConversationsLoading ? (
           <div className="flex items-center justify-center">
             <Loader2 className="mt-4 h-4 w-4 animate-spin" />

@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { useFundWallet } from '@privy-io/react-auth/solana';
 import { ArrowUpDown, Banknote, HelpCircle, Loader2 } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import { toast } from 'sonner';
 import useSWR from 'swr';
 
@@ -14,7 +15,6 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
@@ -129,6 +129,8 @@ export function WalletCard({ wallet }: { wallet: EmbeddedWallet }) {
       <Card className="bg-sidebar">
         <CardContent className="pt-6">
           <div className="space-y-4">
+            <QRCodeSVG value={wallet.publicKey} />
+
             {/* Wallet Public Key Display */}
             <div>
               <Label className="text-xs text-muted-foreground">
@@ -191,17 +193,10 @@ export function WalletCard({ wallet }: { wallet: EmbeddedWallet }) {
         }}
       >
         <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Send SOL</AlertDialogTitle>
-          </AlertDialogHeader>
-
           <div className="mt-2 space-y-4">
             {/* Balance Display */}
-            <div className="flex items-center justify-between rounded-lg border bg-muted/30 px-4 py-2">
-              <span className="text-sm text-muted-foreground">
-                Available Balance:
-              </span>
-              <span className="text-base font-medium">
+            <div className="flex items-center justify-center rounded-lg px-4 py-2">
+              <span className="text-2xl font-bold">
                 {isBalanceLoading ? (
                   <span className="text-muted-foreground">Loading...</span>
                 ) : (
@@ -209,15 +204,11 @@ export function WalletCard({ wallet }: { wallet: EmbeddedWallet }) {
                 )}
               </span>
             </div>
-            <AlertDialogDescription className="text-sm text-muted-foreground">
-              Send SOL to any Solana wallet address. Make sure to verify the
-              recipient&apos;s address before sending.
-            </AlertDialogDescription>
           </div>
 
           {/* Transaction Form */}
           {sendStatus === 'idle' && (
-            <div className="grid gap-4 py-4">
+            <div className="grid gap-4 py-2">
               {/* Recipient Address Input */}
               <div className="space-y-2">
                 <Label>Recipient Address</Label>
@@ -274,7 +265,7 @@ export function WalletCard({ wallet }: { wallet: EmbeddedWallet }) {
                       size="sm"
                       onClick={() => setAmount(calculatedAmount.toFixed(4))}
                       className={cn(
-                        'min-w-[60px]',
+                        'min-w-[60px] shadow-sm shadow-black/40',
                         amount === calculatedAmount.toFixed(4) &&
                           'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground',
                       )}
@@ -309,14 +300,6 @@ export function WalletCard({ wallet }: { wallet: EmbeddedWallet }) {
 
           {/* Dialog Footer */}
           <div className="flex items-center justify-between gap-4">
-            <Link
-              href="/faq#send-sol"
-              className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <HelpCircle className="mr-2 h-4 w-4" />
-              Need help?
-            </Link>
-
             <div className="flex gap-2">
               {/* Idle State Actions */}
               {sendStatus === 'idle' && (
