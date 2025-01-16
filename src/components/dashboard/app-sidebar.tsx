@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { PlusIcon, WalletIcon } from 'lucide-react';
+import { PlusIcon, User2Icon, WalletIcon } from 'lucide-react';
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
@@ -42,6 +42,13 @@ const AppSidebarFooter = () => {
 };
 
 const ExploreItems = [
+  // {
+  //   title: 'Account',
+  //   url: '/account',
+  //   segment: 'account',
+  //   icon: User2Icon,
+  //   external: false,
+  // },
   {
     title: 'New Chat',
     url: '/home',

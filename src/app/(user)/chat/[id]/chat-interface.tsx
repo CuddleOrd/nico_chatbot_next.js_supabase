@@ -147,7 +147,7 @@ function MessageAttachments({
           <div
             key={`${messageId}-${index}`}
             className={cn(
-              'group relative cursor-zoom-in overflow-hidden',
+              'group relative cursor-zoom-in overflow-hidden p-4',
               getImageStyle(index, validAttachments.length),
               'rounded-lg shadow-sm transition-shadow duration-200 hover:shadow-md',
             )}
