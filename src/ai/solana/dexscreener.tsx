@@ -251,7 +251,7 @@ const TokenProfiles = ({
   return (
     <div className="space-y-4">
       {solanaProfiles.map((profile, index) => (
-        <Card key={index} className="bg-muted/50 p-4">
+        <Card key={index} className="bg-muted p-4">
           <div className="flex gap-4">
             {profile.icon && (
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
@@ -271,7 +271,7 @@ const TokenProfiles = ({
             <div className="flex-1 space-y-2">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-medium">
-                  <span className="font-mono text-sm text-muted-foreground">
+                  <span className="font-mono text-sm text-muted">
                     {profile.tokenAddress.slice(0, 4)}...
                     {profile.tokenAddress.slice(-4)}
                   </span>
@@ -280,14 +280,14 @@ const TokenProfiles = ({
                   href={profile.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+                  className="inline-flex items-center text-sm text-muted hover:text-foreground"
                 >
                   View on DexScreener
                   <ExternalLink className="ml-1 h-3 w-3" />
                 </a>
               </div>
               {profile.description && (
-                <p className="whitespace-pre-line text-sm text-muted-foreground">
+                <p className="whitespace-pre-line text-sm text-muted">
                   {profile.description}
                 </p>
               )}
