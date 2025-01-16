@@ -86,11 +86,11 @@ function TokenCard({ token, className }: TokenCardProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'group relative block overflow-hidden rounded-xl bg-background/50',
+        'group relative block overflow-hidden rounded-xl bg-muted shadow-sm shadow-black/60',
         'border border-border/50',
         'transition-all duration-300 ease-out',
-        'hover:-translate-y-1 hover:border-border/80 hover:bg-muted/20',
-        'hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.2)]',
+        'hover:-translate-y-1 hover:border-border/80 hover:bg-muted/50',
+        'hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,1)]',
         'active:translate-y-0 active:shadow-none',
         className,
       )}

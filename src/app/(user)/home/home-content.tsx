@@ -2,20 +2,16 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { RiTwitterXFill } from '@remixicon/react';
 import { useChat } from 'ai/react';
-import { CheckCircle2, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 
 import ChatInterface from '@/app/(user)/chat/[id]/chat-interface';
-import { Badge } from '@/components/ui/badge';
 import BlurFade from '@/components/ui/blur-fade';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import TypingAnimation from '@/components/ui/typing-animation';
 import { useConversations } from '@/hooks/use-conversations';
 import { useUser } from '@/hooks/use-user';
@@ -25,19 +21,13 @@ import { checkEAPTransaction } from '@/server/actions/eap';
 
 import { IntegrationsGrid } from './components/integrations-grid';
 import { ConversationInput } from './conversation-input';
+import { INTEGRATIONS } from './data/integrations';
 import { getRandomSuggestions } from './data/suggestions';
 import { SuggestionCard } from './suggestion-card';
 
 const EAP_PRICE = 1.0;
 const RECEIVE_WALLET_ADDRESS =
   process.env.NEXT_PUBLIC_EAP_RECEIVE_WALLET_ADDRESS!;
-
-const EAP_BENEFITS = [
-  'Support platform growth',
-  'Early access to features',
-  'Unlimited AI interactions',
-  'Join early governance and decisions',
-];
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -280,87 +270,6 @@ export function HomeContent() {
       </div>
     </div>
   );
-
-  // if (!hasEAP) {
-  //   return (
-  //     <div className="relative h-screen w-full overflow-hidden">
-  //       <div className="absolute inset-0 z-10 bg-background/30 backdrop-blur-md" />
-  //       {mainContent}
-  //       <div className="absolute inset-0 z-20 flex items-center justify-center">
-  //         <div className="mx-auto w-full max-w-xl px-6">
-  //           <Card className="relative overflow-hidden border-white/[0.1] bg-white/[0.02] p-8 backdrop-blur-sm backdrop-saturate-150 dark:bg-black/[0.02]">
-  //             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/5 to-white/[0.02] dark:from-white/[0.02] dark:to-white/[0.01]" />
-  //             <div className="relative space-y-6">
-  //               <div className="space-y-2 text-center">
-  //                 <h2 className="text-2xl font-semibold">
-  //                   Early Access Program
-  //                 </h2>
-  //                 <div className="text-muted-foreground">
-  //                   We&apos;re currently limiting <Badge>BETA</Badge> access to
-  //                   a limited amount of users to ensure stable service while
-  //                   continuing to refine features.
-  //                 </div>
-  //               </div>
-
-  //               <Card className="border-teal-500/10 bg-white/[0.01] p-6 backdrop-blur-sm dark:bg-black/[0.01]">
-  //                 <h3 className="mb-4 font-semibold">EAP Benefits</h3>
-  //                 <div className="space-y-3">
-  //                   {EAP_BENEFITS.map((benefit, index) => (
-  //                     <div key={index} className="flex items-start gap-2">
-  //                       <CheckCircle2 className="mt-1 h-4 w-4 text-teal-500" />
-  //                       <span className="text-sm">{benefit}</span>
-  //                     </div>
-  //                   ))}
-  //                 </div>
-  //               </Card>
-
-  //               <div className="rounded-lg bg-white/[0.01] p-4 backdrop-blur-sm dark:bg-black/[0.01]">
-  //                 <div className="mb-2 flex items-center justify-between">
-  //                   <span className="text-sm font-medium">Payment</span>
-  //                   <span className="text-lg font-semibold">
-  //                     {EAP_PRICE} SOL
-  //                   </span>
-  //                 </div>
-  //                 <div className="text-sm text-muted-foreground">
-  //                   Funds will be allocated to cover expenses such as LLM
-  //                   integration, RPC data services, infrastructure maintenance,
-  //                   and other operational costs, all aimed at ensuring the
-  //                   platform&apos;s stability and reliability.
-  //                 </div>
-  //               </div>
-
-  //               <div className="flex items-center justify-between gap-4">
-  //                 <Link
-  //                   href="https://x.com/neur_sh"
-  //                   target="_blank"
-  //                   rel="noopener noreferrer"
-  //                   className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
-  //                 >
-  //                   <RiTwitterXFill className="mr-2 h-4 w-4" />
-  //                   Follow Updates
-  //                 </Link>
-  //                 <Button
-  //                   onClick={handlePurchase}
-  //                   disabled={isProcessing}
-  //                   className="bg-teal-500/70 ring-offset-0 hover:bg-teal-500/90 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-teal-500/60 dark:hover:bg-teal-500/80"
-  //                 >
-  //                   {isProcessing ? (
-  //                     <>
-  //                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-  //                       Processing
-  //                     </>
-  //                   ) : (
-  //                     `Join EAP (${EAP_PRICE} SOL)`
-  //                   )}
-  //                 </Button>
-  //               </div>
-  //             </div>
-  //           </Card>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="relative h-screen">

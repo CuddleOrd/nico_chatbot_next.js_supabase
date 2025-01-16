@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { SendIcon } from 'lucide-react';
+import { SendHorizonalIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -81,7 +81,7 @@ export function ConversationInput({
                 duration-200 ease-in-out
                 hover:bg-primary hover:text-primary-foreground active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <SendIcon
+              <SendHorizonalIcon
                 className="h-4 w-4 transition-transform duration-200 
                   ease-out group-hover:scale-110"
               />
