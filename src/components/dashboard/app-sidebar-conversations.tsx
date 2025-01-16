@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { Conversation } from '@prisma/client';
-import { Loader2, MoreHorizontal, PencilIcon, TrashIcon } from 'lucide-react';
+import { Loader2, PencilIcon, TrashIcon, WandSparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -111,7 +111,7 @@ const ConversationMenuItem = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuAction>
-              <MoreHorizontal className="h-4 w-4" />
+              <WandSparkles className="h-4 w-4" />
             </SidebarMenuAction>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" align="start">
