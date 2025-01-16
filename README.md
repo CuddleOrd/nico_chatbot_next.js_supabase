@@ -1,15 +1,15 @@
-# Neur
+# Austin
 
 > The Intelligent Copilot for Solana
 
-Neur is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, Neur enables seamless interactions with DeFi protocols, NFTs, and much more.
+Austin is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, Austin enables seamless interactions with DeFi protocols, NFTs, and much more.
 
-[![GitHub stars](https://img.shields.io/github/stars/NeurProjects/neur-app?style=flat-square)](https://github.com/NeurProjects/neur-app/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/NeurProjects/neur-app/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/NeurProjects/neur-app?style=flat-square)](https://github.com/NeurProjects/neur-app/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/NeurProjects/neur-app?style=flat-square)](https://github.com/NeurProjects/neur-app/pulls)
-[![Last commit](https://img.shields.io/github/last-commit/NeurProjects/neur-app?style=flat-square)](https://github.com/NeurProjects/neur-app/commits/main)
-[![Contributors](https://img.shields.io/github/contributors/NeurProjects/neur-app?style=flat-square)](https://github.com/NeurProjects/neur-app/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/AustinProjects/austin-app/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/pulls)
+[![Last commit](https://img.shields.io/github/last-commit/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/commits/main)
+[![Contributors](https://img.shields.io/github/contributors/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/graphs/contributors)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
@@ -102,4 +102,5 @@ Information about setting up a local development environment can be found in [LO
 ## Acknowledgements
 
 SendAI. (2024). Solana Agent Kit (Version 1.2.0) [Computer software]. https://github.com/sendaifun/solana-agent-kit
+
 # AI99x

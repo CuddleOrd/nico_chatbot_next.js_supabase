@@ -1,58 +1,58 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  neur-app:
+  austin-app:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: "neur-app"
+    container_name: 'austin-app'
     depends_on:
-      neur-db:
+      austin-db:
         condition: service_healthy
     expose:
-      - "3000"
+      - '3000'
     ports:
-      - "3000:3000"
+      - '3000:3000'
     working_dir: /usr/src/app
-    command: "/bin/bash ./local_entrypoint.sh"
+    command: '/bin/bash ./local_entrypoint.sh'
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neur-db:5432/neurdb
-      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neur-db:5432/neurdb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
+      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
     volumes:
       - .:/usr/src/app
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  neur-studio:
+  austin-studio:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: "neur-studio"
+    container_name: 'austin-studio'
     depends_on:
-      neur-db:
+      austin-db:
         condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neur-db:5432/neurdb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
     expose:
-      - "5555"
+      - '5555'
     ports:
-      - "5555:5555"
+      - '5555:5555'
     working_dir: /usr/src/app
-    command: "pnpm npx prisma studio"
+    command: 'pnpm npx prisma studio'
     volumes:
       - .:/usr/src/app
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  neur-db:
-    image: "postgres:15"
-    container_name: "neur-db"
+  austin-db:
+    image: 'postgres:15'
+    container_name: 'austin-db'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -60,11 +60,11 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
-      - "neur-db-data:/var/lib/postgresql/data"
+      - 'austin-db-data:/var/lib/postgresql/data'
 
 volumes:
-  neur-db-data:
+  austin-db-data:
   root_node_modules:
   webapp_next:

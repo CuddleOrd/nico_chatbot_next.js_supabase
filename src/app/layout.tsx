@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Neur',
-    default: 'Neur - The Intelligent Copilot for Solana',
+    template: '%s | Austin',
+    default: 'Austin - The Intelligent Copilot for Solana',
   },
   description: 'The Intelligent Copilot elevating your Solana experience.',
 
