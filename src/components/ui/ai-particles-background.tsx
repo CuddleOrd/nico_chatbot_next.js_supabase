@@ -41,7 +41,7 @@ export function AiParticlesBackground() {
           number: {
             density: {
               enable: true,
-              area: 5000,
+              area: 4000,
             },
             value: 100,
           },
@@ -65,7 +65,7 @@ export function AiParticlesBackground() {
             ],
           },
           size: {
-            value: { min: 12, max: 68 },
+            value: { min: 8, max: 68 },
           },
         },
         interactivity: {
