@@ -25,80 +25,76 @@ export function AiParticlesBackground() {
           color: {
             value: isDark ? '#7E7E7E' : '#D8D8D9',
           },
-          links: {
-            color: isDark ? '#767676' : '#868686',
-            distance: 250,
-            enable: true,
-            opacity: isDark ? 0.3 : 0.2,
-            width: 1,
-          },
           collisions: {
             enable: false,
           },
           move: {
             enable: true,
-            speed: 0.4,
+            speed: 0.5,
             direction: 'none',
             random: true,
             straight: false,
             outModes: {
-              default: 'bounce',
+              default: 'out',
             },
           },
           number: {
             density: {
               enable: true,
-              area: 1000,
+              area: 5000,
             },
-            value: 80,
+            value: 100,
           },
           opacity: {
-            value: isDark ? 0.3 : 0.5,
+            value: isDark ? 0.5 : 0.7,
             animation: {
               enable: true,
-              speed: 0.8,
-              minimumValue: 0.1,
+              speed: 0.5,
+              minimumValue: 0.2,
               sync: false,
             },
           },
           shape: {
-            type: 'circle',
+            type: ['image'],
+            image: [
+              {
+                src: '/logo.svg',
+                width: 40,
+                height: 40,
+              },
+            ],
           },
           size: {
-            value: { min: 1, max: 2 },
+            value: { min: 12, max: 68 },
           },
         },
         interactivity: {
-          detect_on: 'window',
+          detect_on: 'canvas',
           events: {
             onHover: {
               enable: true,
-              mode: ['connect', 'bubble'],
-              parallax: {
-                enable: true,
-                force: 60,
-                smooth: 10,
-              },
+              mode: ['grab', 'bubble'],
+            },
+            onClick: {
+              enable: true,
+              mode: 'push',
             },
           },
           modes: {
-            connect: {
-              distance: 180,
+            grab: {
+              distance: 200,
               links: {
-                opacity: 0.5,
-                color: isDark ? '#E5E7EB' : '#374151',
+                opacity: 0.6,
               },
-              radius: 200,
             },
             bubble: {
-              distance: 200,
-              size: 4,
-              duration: 0.4,
-              opacity: 0.8,
+              distance: 250,
+              size: 6,
+              duration: 0.5,
+              opacity: 0.9,
             },
-            repulse: {
-              distance: 100,
-              duration: 0.4,
+            push: {
+              quantity: 4,
             },
           },
         },
