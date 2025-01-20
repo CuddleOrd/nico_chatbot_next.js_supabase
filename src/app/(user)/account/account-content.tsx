@@ -97,20 +97,8 @@ export function AccountContent() {
                       </Label>
                       <div className="mt-1 flex h-8 items-center">
                         <span className={cn('text-sm font-medium')}>
-                          {user?.earlyAccess ? 'Active' : 'Not Active'}
+                          {!user?.earlyAccess ? 'Active' : 'Not Active'}
                         </span>
-
-                        {!user?.earlyAccess && (
-                          <div className="ml-auto">
-                            <Button
-                              variant="default"
-                              size="sm"
-                              onClick={() => router.push('/home')}
-                            >
-                              Get Early Access
-                            </Button>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>

@@ -114,76 +114,12 @@ export function HomeContent() {
   const handleSend = async (value: string) => {
     if (!value.trim()) return;
 
-    if (!user?.earlyAccess) {
-      return;
-    }
-
     const fakeEvent = new Event('submit') as any;
     fakeEvent.preventDefault = () => {};
 
     await handleSubmit(fakeEvent, { data: { content: value } });
     setShowChat(true);
     window.history.replaceState(null, '', `/chat/${chatId}`);
-  };
-
-  const handlePurchase = async () => {
-    if (!user) return;
-    setIsProcessing(true);
-    setVerificationAttempts(0);
-
-    try {
-      const tx = await SolanaUtils.sendTransferWithMemo({
-        to: RECEIVE_WALLET_ADDRESS,
-        amount: EAP_PRICE,
-        memo: `{
-                    "type": "EAP_PURCHASE",
-                    "user_id": "${user.id}"
-                }`,
-      });
-
-      if (tx) {
-        setVerifyingTx(tx);
-        toast.success('Transaction Sent', {
-          description: 'Transaction has been sent. Verifying your purchase...',
-        });
-      } else {
-        toast.error('Transaction Failed', {
-          description: 'Failed to send the transaction. Please try again.',
-        });
-      }
-    } catch (error) {
-      console.error('Transaction error:', error);
-
-      let errorMessage = 'Failed to send the transaction. Please try again.';
-
-      if (error instanceof Error) {
-        const errorString = error.toString();
-        if (
-          errorString.includes('TransactionExpiredBlockheightExceededError')
-        ) {
-          toast.error('Transaction Timeout', {
-            description: (
-              <>
-                <span className="font-semibold">
-                  Transaction might have been sent successfully.
-                </span>
-                <br />
-                If SOL was deducted from your wallet, please visit the FAQ page
-                and input your transaction hash for manual verification.
-              </>
-            ),
-          });
-          return;
-        }
-        errorMessage = error.message;
-      }
-
-      toast.error('Transaction Failed', {
-        description: errorMessage,
-      });
-    } finally {
-      setIsProcessing(false);
-    }
   };
 
   // Reset chat when pathname changes to /home
@@ -215,7 +151,7 @@ export function HomeContent() {
     );
   }
 
-  const hasEAP = user?.earlyAccess === true;
+  const hasEAP = user?.earlyAccess === false;
 
   const mainContent = (
     <div
