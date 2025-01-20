@@ -1,12 +1,12 @@
 'use client';
 
 import { PrivyProvider } from '@privy-io/react-auth';
-import { toSolanaWalletConnectors } from '@privy-io/react-auth/solana';
+// import { toSolanaWalletConnectors } from '@privy-io/react-auth/solana';
 import { useTheme } from 'next-themes';
 
-const solanaConnectors = toSolanaWalletConnectors({
-  shouldAutoConnect: false,
-});
+// const solanaConnectors = toSolanaWalletConnectors({
+//   shouldAutoConnect: false,
+// });
 
 export default function AuthProviders({
   children,
@@ -23,11 +23,11 @@ export default function AuthProviders({
           theme: resolvedTheme as 'light' | 'dark',
           logo: resolvedTheme === 'dark' ? '/letter_w.svg' : '/letter.svg',
         },
-        externalWallets: {
-          solana: {
-            connectors: solanaConnectors,
-          },
-        },
+        // externalWallets: {
+        //   solana: {
+        //     connectors: solanaConnectors,
+        //   },
+        // },
       }}
     >
       {children}
