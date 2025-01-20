@@ -38,10 +38,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          The Intelligent Copilot for{' '}
-          <span className="bg-gradient-to-r from-[#9945FF] via-[#14F195] to-[#00F5FF] bg-clip-text text-transparent">
-            Solana
-          </span>
+          The Intelligent Copilot for Solana
         </motion.div>
 
         <motion.button
