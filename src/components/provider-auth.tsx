@@ -46,7 +46,7 @@ export default function AuthProviders({
             connectors: solanaConnectors,
           },
         },
-        loginMethods: loginMethod,
+        // loginMethods: loginMethod,
       }}
     >
       {children}
