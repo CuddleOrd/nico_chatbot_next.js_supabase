@@ -31,7 +31,7 @@ import {
   dbGetConversation,
 } from '@/server/db/queries';
 
-export const maxDuration = 120;
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
   const session = await verifyUser();
