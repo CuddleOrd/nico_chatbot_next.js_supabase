@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { useChat } from 'ai/react';
-import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,19 +14,13 @@ import BlurFade from '@/components/ui/blur-fade';
 import TypingAnimation from '@/components/ui/typing-animation';
 import { useConversations } from '@/hooks/use-conversations';
 import { useUser } from '@/hooks/use-user';
-import { SolanaUtils } from '@/lib/solana';
 import { cn } from '@/lib/utils';
 import { checkEAPTransaction } from '@/server/actions/eap';
 
 import { IntegrationsGrid } from './components/integrations-grid';
 import { ConversationInput } from './conversation-input';
-import { INTEGRATIONS } from './data/integrations';
 import { getRandomSuggestions } from './data/suggestions';
 import { SuggestionCard } from './suggestion-card';
-
-const EAP_PRICE = 1.0;
-const RECEIVE_WALLET_ADDRESS =
-  process.env.NEXT_PUBLIC_EAP_RECEIVE_WALLET_ADDRESS!;
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -45,7 +38,6 @@ export function HomeContent() {
   const pathname = usePathname();
   const suggestions = useMemo(() => getRandomSuggestions(4), []);
   const [showChat, setShowChat] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [chatId, setChatId] = useState(() => uuidv4());
   const { user, isLoading } = useUser();
   const [verifyingTx, setVerifyingTx] = useState<string | null>(null);
@@ -151,13 +143,11 @@ export function HomeContent() {
     );
   }
 
-  const hasEAP = user?.earlyAccess === false;
-
   const mainContent = (
     <div
       className={cn(
         'mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6',
-        !hasEAP ? 'h-screen py-0' : 'py-12',
+        !true ? 'h-screen py-0' : 'py-12',
       )}
     >
       <BlurFade delay={0.2}>
@@ -169,32 +159,30 @@ export function HomeContent() {
       </BlurFade>
 
       <div className="mx-auto w-full max-w-3xl space-y-8">
-        {hasEAP && (
-          <div className="space-y-8">
-            <BlurFade delay={0.2}>
-              <div className="space-y-2">
-                <SectionTitle>Suggestions</SectionTitle>
-                <div className="grid grid-cols-2 gap-4">
-                  {suggestions.map((suggestion, index) => (
-                    <SuggestionCard
-                      key={suggestion.title}
-                      {...suggestion}
-                      delay={0.3 + index * 0.1}
-                      onSelect={setInput}
-                    />
-                  ))}
-                </div>
+        <div className="space-y-8">
+          <BlurFade delay={0.2}>
+            <div className="space-y-2">
+              <SectionTitle>Suggestions</SectionTitle>
+              <div className="grid grid-cols-2 gap-4">
+                {suggestions.map((suggestion, index) => (
+                  <SuggestionCard
+                    key={suggestion.title}
+                    {...suggestion}
+                    delay={0.3 + index * 0.1}
+                    onSelect={setInput}
+                  />
+                ))}
               </div>
-            </BlurFade>
+            </div>
+          </BlurFade>
 
-            <BlurFade delay={0.4}>
-              <div className="space-y-2">
-                <SectionTitle>Integrations</SectionTitle>
-                <IntegrationsGrid />
-              </div>
-            </BlurFade>
-          </div>
-        )}
+          <BlurFade delay={0.4}>
+            <div className="space-y-2">
+              <SectionTitle>Integrations</SectionTitle>
+              <IntegrationsGrid />
+            </div>
+          </BlurFade>
+        </div>
 
         <BlurFade delay={0.1}>
           <ConversationInput

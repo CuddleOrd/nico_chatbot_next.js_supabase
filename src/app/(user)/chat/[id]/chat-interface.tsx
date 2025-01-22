@@ -6,13 +6,7 @@ import Image from 'next/image';
 
 import { Attachment, Message } from 'ai';
 import { useChat } from 'ai/react';
-import {
-  ChevronDown,
-  Image as ImageIcon,
-  Loader2,
-  SendHorizontal,
-  X,
-} from 'lucide-react';
+import { Image as ImageIcon, Loader2, SendHorizontal, X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -20,7 +14,6 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
 import { getToolConfig } from '@/ai/providers';
-import { FloatingWallet } from '@/components/floating-wallet';
 import Logo from '@/components/logo';
 import { ToolResult } from '@/components/message/tool-result';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -28,7 +21,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useWalletPortfolio } from '@/hooks/use-wallet-portfolio';
 import { uploadImage } from '@/lib/upload';
-import { cn, throttle } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 // Types
 interface UploadingImage extends Attachment {
@@ -76,22 +69,7 @@ interface ToolInvocation {
 // Constants
 const MAX_CHARS = 2000;
 const MAX_VISIBLE_ATTACHMENTS = 4;
-const MAX_JSON_LINES = 20; // Maximum number of lines to show in JSON output
-
-// Utility functions
-const truncateJson = (json: unknown): string => {
-  const formatted = JSON.stringify(json, null, 2);
-  const lines = formatted.split('\n');
-
-  if (lines.length <= MAX_JSON_LINES) {
-    return formatted;
-  }
-
-  const firstHalf = lines.slice(0, MAX_JSON_LINES / 2);
-  const lastHalf = lines.slice(-MAX_JSON_LINES / 2);
-
-  return [...firstHalf, '    ...', ...lastHalf].join('\n');
-};
+const MAX_JSON_LINES = 20;
 
 const getGridLayout = (count: number) => {
   if (count === 1) return 'grid-cols-1';
