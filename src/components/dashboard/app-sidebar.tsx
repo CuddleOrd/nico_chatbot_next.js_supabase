@@ -17,6 +17,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useSidebar } from '@/components/ui/sidebar';
 
 import { AppSidebarConversations } from './app-sidebar-conversations';
 import { AppSidebarUser } from './app-sidebar-user';
@@ -35,17 +36,22 @@ const AppSidebarHeader = () => {
 };
 
 const AppSidebarFooter = () => {
+  const { state } = useSidebar();
+
   return (
     <SidebarFooter>
-      <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
-        <span>Powered by</span>{' '}
-        <Image
-          src="/integrations/deepseek.png"
-          alt={'deepseek'}
-          width={150}
-          height={24}
-        />
-      </div>
+      {state !== 'collapsed' && (
+        <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
+          <span>Powered by</span>{' '}
+          <Image
+            src="/integrations/deepseek.png"
+            alt={'deepseek'}
+            width={150}
+            height={24}
+          />
+        </div>
+      )}
+
       <AppSidebarUser />
     </SidebarFooter>
   );
@@ -116,9 +122,11 @@ export function AppSidebar() {
                         height={20}
                         className="-ml-[1px]"
                       />
-                      <span className="-ml-[2px]">{'Buy $NIKO'}</span>
-                      <span className="ml-3 text-end text-xs">
-                        ( Coming soon ){' '}
+                      <span className="-ml-[2px]">
+                        {'Buy $NIKO'}{' '}
+                        <span className="ml-3 text-end text-xs">
+                          ( Coming soon )
+                        </span>
                       </span>
                     </Link>
                   </SidebarMenuButton>
