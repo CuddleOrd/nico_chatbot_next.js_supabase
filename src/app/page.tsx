@@ -24,7 +24,7 @@ export default function Home() {
 
   if (isMaintenanceMode) {
     login = () => {
-      window.location.href = 'https://x.com/austin_sh';
+      window.location.href = 'https://x.com/nikoai_sh';
     };
   }
 

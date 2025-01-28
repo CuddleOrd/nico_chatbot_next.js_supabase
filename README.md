@@ -1,15 +1,15 @@
-# Austin
+# NikoAi
 
 > The Intelligent Copilot for Solana
 
-Austin is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, Austin enables seamless interactions with DeFi protocols, NFTs, and much more.
+NikoAi is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, NikoAi enables seamless interactions with DeFi protocols, NFTs, and much more.
 
-[![GitHub stars](https://img.shields.io/github/stars/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/AustinProjects/austin-app/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/pulls)
-[![Last commit](https://img.shields.io/github/last-commit/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/commits/main)
-[![Contributors](https://img.shields.io/github/contributors/AustinProjects/austin-app?style=flat-square)](https://github.com/AustinProjects/austin-app/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/pulls)
+[![Last commit](https://img.shields.io/github/last-commit/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/commits/main)
+[![Contributors](https://img.shields.io/github/contributors/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/graphs/contributors)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)

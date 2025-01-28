@@ -9,24 +9,24 @@ import useSWR from 'swr';
 
 import { debugLog } from '@/lib/debug';
 import { getUserData } from '@/server/actions/user';
-import { AustinUser, PrismaUser, PrivyUser } from '@/types/db';
+import { NikoAiUser, PrismaUser, PrivyUser } from '@/types/db';
 
 /**
- * Extended interface for AustinUser that includes Privy functionality
+ * Extended interface for NikoAiUser that includes Privy functionality
  * Omits 'user' and 'ready' from PrivyInterface to avoid conflicts
  */
-type AustinUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
+type NikoAiUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
   isLoading: boolean;
-  user: AustinUser | null;
+  user: NikoAiUser | null;
 };
 
 /**
- * Loads cached AustinUser data from localStorage
- * @returns {AustinUser | null} Cached user data or null if not found/invalid
+ * Loads cached NikoAiUser data from localStorage
+ * @returns {NikoAiUser | null} Cached user data or null if not found/invalid
  */
-function loadFromCache(): AustinUser | null {
+function loadFromCache(): NikoAiUser | null {
   try {
-    const cached = localStorage.getItem('austin-user-data');
+    const cached = localStorage.getItem('nikoai-user-data');
     if (cached) {
       debugLog('Loading user data from cache', cached, {
         module: 'useUser',
@@ -49,19 +49,19 @@ function loadFromCache(): AustinUser | null {
 }
 
 /**
- * Saves AustinUser data to localStorage
- * @param {AustinUser | null} data User data to cache or null to clear cache
+ * Saves NikoAiUser data to localStorage
+ * @param {NikoAiUser | null} data User data to cache or null to clear cache
  */
-function saveToCache(data: AustinUser | null) {
+function saveToCache(data: NikoAiUser | null) {
   try {
     if (data) {
-      localStorage.setItem('austin-user-data', JSON.stringify(data));
+      localStorage.setItem('nikoai-user-data', JSON.stringify(data));
       debugLog('User data saved to cache', data, {
         module: 'useUser',
         level: 'info',
       });
     } else {
-      localStorage.removeItem('austin-user-data');
+      localStorage.removeItem('nikoai-user-data');
       debugLog('User data removed from cache', null, {
         module: 'useUser',
         level: 'info',
@@ -76,13 +76,13 @@ function saveToCache(data: AustinUser | null) {
 }
 
 /**
- * Fetches AustinUser data from the server
+ * Fetches NikoAiUser data from the server
  * @param {PrivyUser} privyUser The authenticated Privy user
- * @returns {Promise<AustinUser | null>} User data or null if fetch fails
+ * @returns {Promise<NikoAiUser | null>} User data or null if fetch fails
  */
-async function fetchAustinUserData(
+async function fetchNikoAiUserData(
   privyUser: PrivyUser,
-): Promise<AustinUser | null> {
+): Promise<NikoAiUser | null> {
   try {
     const response = await getUserData();
     if (response?.data?.success && response?.data?.data) {
@@ -94,7 +94,7 @@ async function fetchAustinUserData(
       return {
         ...prismaUser,
         privyUser: privyUser as PrivyUser,
-      } as AustinUser;
+      } as NikoAiUser;
     }
     debugLog(
       'Server returned unsuccessful user data response',
@@ -115,13 +115,13 @@ async function fetchAustinUserData(
 }
 
 /**
- * Custom hook for managing AustinUser data fetching, caching, and synchronization
+ * Custom hook for managing NikoAiUser data fetching, caching, and synchronization
  * Combines Privy authentication with our user data management system
- * @returns {AustinUserInterface} Object containing user data, loading state, and Privy interface methods
+ * @returns {NikoAiUserInterface} Object containing user data, loading state, and Privy interface methods
  */
-export function useUser(): AustinUserInterface {
+export function useUser(): NikoAiUserInterface {
   const { ready, user: privyUser, ...privyRest } = usePrivy();
-  const [initialCachedUser, setInitialCachedUser] = useState<AustinUser | null>(
+  const [initialCachedUser, setInitialCachedUser] = useState<NikoAiUser | null>(
     null,
   );
   const router = useRouter();
@@ -138,9 +138,9 @@ export function useUser(): AustinUserInterface {
 
   /**
    * SWR fetcher function that combines server data with Privy user data
-   * @returns {Promise<AustinUser | null>} Combined user data or null
+   * @returns {Promise<NikoAiUser | null>} Combined user data or null
    */
-  const fetcher = useCallback(async (): Promise<AustinUser | null> => {
+  const fetcher = useCallback(async (): Promise<NikoAiUser | null> => {
     if (!ready || !privyUser) {
       debugLog('Privy not ready or user not logged in', null, {
         module: 'useUser',
@@ -150,18 +150,18 @@ export function useUser(): AustinUserInterface {
     }
 
     if (privyUser) {
-      debugLog('Fetching AustinUser data from server', null, {
+      debugLog('Fetching NikoAiUser data from server', null, {
         module: 'useUser',
         level: 'info',
       });
-      const austinUser = await fetchAustinUserData(privyUser as PrivyUser);
-      debugLog('Merged AustinUser data', austinUser, {
+      const nikoaiUser = await fetchNikoAiUserData(privyUser as PrivyUser);
+      debugLog('Merged NikoAiUser data', nikoaiUser, {
         module: 'useUser',
         level: 'info',
       });
-      return austinUser;
+      return nikoaiUser;
     }
-    debugLog('No valid AustinUser data retrieved', null, {
+    debugLog('No valid NikoAiUser data retrieved', null, {
       module: 'useUser',
       level: 'warn',
     });
@@ -169,22 +169,22 @@ export function useUser(): AustinUserInterface {
   }, [ready, privyUser]);
 
   // Use SWR for data fetching and state management
-  const { data: austinUser, isValidating: swrLoading } =
-    useSWR<AustinUser | null>(swrKey, fetcher, {
+  const { data: nikoaiUser, isValidating: swrLoading } =
+    useSWR<NikoAiUser | null>(swrKey, fetcher, {
       fallbackData: initialCachedUser,
       revalidateOnFocus: false,
       shouldRetryOnError: false,
     });
 
-  debugLog('Current AustinUser data', austinUser, { module: 'useUser' });
+  debugLog('Current NikoAiUser data', nikoaiUser, { module: 'useUser' });
   debugLog('SWR validation status', swrLoading, { module: 'useUser' });
 
   // Update cache when new user data is fetched
   useEffect(() => {
-    if (austinUser) {
-      saveToCache(austinUser);
+    if (nikoaiUser) {
+      saveToCache(nikoaiUser);
     }
-  }, [austinUser]);
+  }, [nikoaiUser]);
 
   const isLoading = swrLoading && !initialCachedUser;
   debugLog('Loading state', { isLoading }, { module: 'useUser' });
@@ -220,8 +220,8 @@ export function useUser(): AustinUserInterface {
 
   return {
     ...privyRest,
-    isLoading: isLoading || austinUser == null,
-    user: austinUser || null,
+    isLoading: isLoading || nikoaiUser == null,
+    user: nikoaiUser || null,
     logout: extendedLogout,
   };
 }

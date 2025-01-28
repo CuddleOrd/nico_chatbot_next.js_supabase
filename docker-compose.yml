@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  austin-app:
+  nikoai-app:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: 'austin-app'
+    container_name: 'nikoai-app'
     depends_on:
-      austin-db:
+      nikoai-db:
         condition: service_healthy
     expose:
       - '3000'
@@ -19,24 +19,24 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
-      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@nikoai-db:5432/nikoaidb
+      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@nikoai-db:5432/nikoaidb
     volumes:
       - .:/usr/src/app
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  austin-studio:
+  nikoai-studio:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: 'austin-studio'
+    container_name: 'nikoai-studio'
     depends_on:
-      austin-db:
+      nikoai-db:
         condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@austin-db:5432/austindb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@nikoai-db:5432/nikoaidb
     expose:
       - '5555'
     ports:
@@ -48,9 +48,9 @@ services:
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  austin-db:
+  nikoai-db:
     image: 'postgres:15'
-    container_name: 'austin-db'
+    container_name: 'nikoai-db'
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
       interval: 10s
@@ -62,9 +62,9 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - 'austin-db-data:/var/lib/postgresql/data'
+      - 'nikoai-db-data:/var/lib/postgresql/data'
 
 volumes:
-  austin-db-data:
+  nikoai-db-data:
   root_node_modules:
   webapp_next:
