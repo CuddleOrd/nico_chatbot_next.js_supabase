@@ -30,12 +30,12 @@ export const INTEGRATIONS: Integration[] = [
     },
   },
   {
-    icon: 'integrations/magic_eden.svg',
-    label: 'Magic Eden',
-    description: 'Explore the best NFT collections',
+    icon: 'integrations/deepseek.svg',
+    label: 'DeepSeek',
+    description: 'DeepSeek into the unknown',
     theme: {
-      primary: '#9333EA', // Purple
-      secondary: '#A855F7', // Light purple
+      primary: '#4f6bfe',
+      secondary: '#3b57eb',
     },
   },
   {

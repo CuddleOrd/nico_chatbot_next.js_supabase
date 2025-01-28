@@ -1,11 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { PlusIcon, User2Icon, WalletIcon } from 'lucide-react';
+import { PlusIcon, WalletIcon } from 'lucide-react';
 
-import { ThemeToggle } from '@/components/theme-toggle';
 import {
   Sidebar,
   SidebarContent,
@@ -28,6 +28,7 @@ const AppSidebarHeader = () => {
         <span className="pl-2 text-lg font-medium tracking-tight group-data-[collapsible=icon]:hidden">
           NikoAi.com
         </span>
+        <Image src="/logo.svg" alt={'logo'} width={28} height={28} />
       </div>
     </SidebarHeader>
   );
@@ -36,19 +37,21 @@ const AppSidebarHeader = () => {
 const AppSidebarFooter = () => {
   return (
     <SidebarFooter>
+      <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
+        <span>Powered by</span>{' '}
+        <Image
+          src="/integrations/deepseek.png"
+          alt={'deepseek'}
+          width={150}
+          height={24}
+        />
+      </div>
       <AppSidebarUser />
     </SidebarFooter>
   );
 };
 
 const ExploreItems = [
-  // {
-  //   title: 'Account',
-  //   url: '/account',
-  //   segment: 'account',
-  //   icon: User2Icon,
-  //   external: false,
-  // },
   {
     title: 'New Chat',
     url: '/home',
@@ -100,6 +103,26 @@ export function AppSidebar() {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
+                <SidebarMenuItem key={'Buy $NIKO'}>
+                  <SidebarMenuButton asChild>
+                    <Link
+                      href={'/home'}
+                      // target={'_blank'}
+                    >
+                      <Image
+                        src="/logo.svg"
+                        alt={'logo'}
+                        width={20}
+                        height={20}
+                        className="-ml-[1px]"
+                      />
+                      <span className="-ml-[2px]">{'Buy $NIKO'}</span>
+                      <span className="ml-3 text-end text-xs">
+                        ( Coming soon ){' '}
+                      </span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

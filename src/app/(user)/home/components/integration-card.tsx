@@ -57,8 +57,8 @@ export function IntegrationCard({
         <Image
           src={item.icon}
           alt={item.label}
-          width={24}
-          height={24}
+          width={28}
+          height={28}
           className="z-10 transition-transform duration-300 group-hover:scale-105"
         />
       </motion.div>
