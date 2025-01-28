@@ -31,7 +31,11 @@ import {
   dbGetConversation,
 } from '@/server/db/queries';
 
-export const maxDuration = 60;
+//only pro vercel acc accept 120
+export const maxDuration = 120;
+
+//this is for free acc.
+//export const maxDuration = 120;
 
 export async function POST(req: Request) {
   const session = await verifyUser();
