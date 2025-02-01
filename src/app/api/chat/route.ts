@@ -32,7 +32,7 @@ import {
 } from '@/server/db/queries';
 
 //only pro vercel acc accept 120
-export const maxDuration = 120;
+export const maxDuration = 60;
 
 //this is for free acc.
 //export const maxDuration = 120;
