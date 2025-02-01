@@ -22,7 +22,7 @@ const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const claude35Sonnet = anthropic('claude-3-5-sonnet-20241022');
 
 const openai = createOpenAI({
-  baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+  baseURL: process.env.OPENAI_BASE_URL || 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1',
   apiKey: process.env.OPENAI_API_KEY,
   compatibility: 'strict',
 });
