@@ -147,7 +147,7 @@ export function HomeContent() {
     <div
       className={cn(
         'mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6',
-        !true ? 'h-screen py-0' : 'py-12',
+        !true ? 'min-h-screen py-0' : 'py-12',
       )}
     >
       <BlurFade delay={0.2}>
@@ -176,7 +176,7 @@ export function HomeContent() {
             </div>
           </BlurFade>
 
-          <BlurFade delay={0.4}>
+          <BlurFade delay={0.4} className="hidden sm:grid">
             <div className="space-y-2">
               <SectionTitle>Integrations</SectionTitle>
               <IntegrationsGrid />
@@ -196,7 +196,7 @@ export function HomeContent() {
   );
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-fit">
       <div
         className={cn(
           'absolute inset-0 transition-opacity duration-300',
