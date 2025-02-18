@@ -41,18 +41,20 @@ const AppSidebarFooter = () => {
   return (
     <SidebarFooter>
       {state !== 'collapsed' && (
-        <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
-          <span>Powered by</span>{' '}
-          <Image
-            src="/integrations/deepseek.png"
-            alt={'deepseek'}
-            width={150}
-            height={24}
-          />
-        </div>
+        <>
+          <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
+            <span>Powered by</span>{' '}
+            <Image
+              src="/integrations/deepseek.png"
+              alt={'deepseek'}
+              width={150}
+              height={24}
+              className="rounded-lg"
+            />
+          </div>
+          <AppSidebarUser />
+        </>
       )}
-
-      <AppSidebarUser />
     </SidebarFooter>
   );
 };
@@ -85,7 +87,11 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="hidden md:flex">
+    <Sidebar
+      variant="sidebar"
+      collapsible="icon"
+      className="hidden p-3 md:flex"
+    >
       <AppSidebarHeader />
 
       <SidebarContent>
@@ -111,10 +117,7 @@ export function AppSidebar() {
                 ))}
                 <SidebarMenuItem key={'Buy $NIKO'}>
                   <SidebarMenuButton asChild>
-                    <Link
-                      href={'/home'}
-                      // target={'_blank'}
-                    >
+                    <Link href={'/home'}>
                       <Image
                         src="/logo.svg"
                         alt={'logo'}
@@ -124,7 +127,7 @@ export function AppSidebar() {
                       />
                       <span className="-ml-[2px]">
                         {'Buy $NIKO'}{' '}
-                        <span className="ml-3 text-end text-xs">
+                        <span className="ml-1 text-end text-xs">
                           ( Coming soon )
                         </span>
                       </span>

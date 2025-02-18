@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { useChat } from 'ai/react';
-import { Loader2 } from 'lucide-react';
+import { Hand, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,7 +18,6 @@ import { useUser } from '@/hooks/use-user';
 import { cn } from '@/lib/utils';
 import { checkEAPTransaction } from '@/server/actions/eap';
 
-import { IntegrationsGrid } from './components/integrations-grid';
 import { ConversationInput } from './conversation-input';
 import { getRandomSuggestions } from './data/suggestions';
 import { SuggestionCard } from './suggestion-card';
@@ -36,7 +36,7 @@ function SectionTitle({ children }: SectionTitleProps) {
 
 export function HomeContent() {
   const pathname = usePathname();
-  const suggestions = useMemo(() => getRandomSuggestions(4), []);
+  const suggestions = useMemo(() => getRandomSuggestions(3), []);
   const [showChat, setShowChat] = useState(false);
   const [chatId, setChatId] = useState(() => uuidv4());
   const { user, isLoading } = useUser();
@@ -146,24 +146,42 @@ export function HomeContent() {
   const mainContent = (
     <div
       className={cn(
-        'mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6',
-        !true ? 'min-h-screen py-0' : 'py-12',
+        'mx-auto flex h-screen w-full max-w-6xl flex-1 flex-col items-stretch justify-between px-3 py-0',
       )}
     >
       <BlurFade delay={0.2}>
+        <div className="mx-auto mb-4 mt-44 flex h-20 w-20 items-center justify-center rounded-3xl border border-gray-600/60 bg-gray-700/90 shadow-md sm:mt-32">
+          <Image
+            src={'/icons/white_hand.svg'}
+            height={40}
+            width={40}
+            alt="hello"
+            className="h-10 w-10 text-gray-200"
+          />
+        </div>
         <TypingAnimation
-          className="mb-12 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-center text-4xl font-semibold tracking-tight text-transparent md:text-4xl lg:text-5xl"
+          className="bg-gradient-to-r from-gray-500 to-gray-500/70 bg-clip-text pb-2 text-center text-4xl font-semibold tracking-tight text-gray-400 text-transparent md:text-4xl lg:text-[2.6rem]"
           duration={50}
-          text="How can I assist you?"
+          text="Hi, Nico"
         />
+        <TypingAnimation
+          className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text pb-6 text-center text-4xl font-semibold tracking-tight text-transparent md:text-4xl lg:text-[2.6rem]"
+          duration={50}
+          text="Can I help you with anything?"
+        />
+        <div className="flex justify-center">
+          <p className="max-w-[490px] text-center text-gray-400">
+            Ready to assist you with anything you need, from answering questions
+            to providing recommendations, Let{"'"}s get started!
+          </p>
+        </div>
       </BlurFade>
 
-      <div className="mx-auto w-full max-w-3xl space-y-8">
-        <div className="space-y-8">
+      <div className="mx-auto mb-3 w-full max-w-2xl space-y-8">
+        <div className="space-y-4">
           <BlurFade delay={0.2}>
             <div className="space-y-2">
-              <SectionTitle>Suggestions</SectionTitle>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="hidden grid-cols-3 gap-4 md:grid">
                 {suggestions.map((suggestion, index) => (
                   <SuggestionCard
                     key={suggestion.title}
@@ -173,13 +191,6 @@ export function HomeContent() {
                   />
                 ))}
               </div>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.4} className="hidden sm:grid">
-            <div className="space-y-2">
-              <SectionTitle>Integrations</SectionTitle>
-              <IntegrationsGrid />
             </div>
           </BlurFade>
         </div>
@@ -196,7 +207,7 @@ export function HomeContent() {
   );
 
   return (
-    <div className="relative h-fit">
+    <div className="relative h-screen">
       <div
         className={cn(
           'absolute inset-0 transition-opacity duration-300',
