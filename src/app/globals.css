@@ -51,7 +51,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-[#e8e6f3] via-[#f7dceb] to-[#f3e8ff] text-foreground;
   }
 
   /* Custom Scrollbar Styles */
@@ -117,4 +117,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* Tailwind CSS: Add this to your styles */
+.text-smooth {
+  -webkit-font-smoothing: antialiased; /* macOS */
+  -moz-osx-font-smoothing: grayscale; /* macOS */
 }

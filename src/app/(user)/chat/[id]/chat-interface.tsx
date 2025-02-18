@@ -6,7 +6,14 @@ import Image from 'next/image';
 
 import { Attachment, Message } from 'ai';
 import { useChat } from 'ai/react';
-import { Image as ImageIcon, Loader2, SendHorizontal, X } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Image as ImageIcon,
+  Link,
+  Loader2,
+  SendHorizontal,
+  X,
+} from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -189,7 +196,7 @@ function MessageToolInvocations({
             <span className="truncate text-xs font-medium text-foreground/90">
               {finalDisplayName}
             </span>
-            <span className="ml-auto font-mono text-[10px] text-muted-foreground/70 hidden">
+            <span className="ml-auto hidden font-mono text-[10px] text-muted-foreground/70">
               {toolCallId.slice(0, 9)}
             </span>
           </div>
@@ -632,8 +639,8 @@ export default function ChatInterface({
       <div className="sticky bottom-0 z-10">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background via-background/95 to-background/0" />
         <div className="relative mx-auto w-full max-w-3xl px-4 py-4">
-          <form onSubmit={handleFormSubmit} className="space-y-4">
-            <div className="relative overflow-hidden rounded-md bg-muted shadow-sm shadow-black/60">
+          <form onSubmit={handleFormSubmit} className="relative space-y-4">
+            <div className="relative flex flex-row gap-1 overflow-hidden rounded-full bg-muted p-1 shadow-sm shadow-black/60">
               {attachments.length > 0 && (
                 <div className="flex gap-2 overflow-x-auto rounded-t-md bg-muted/50 p-3">
                   {attachments.map((attachment) => (
@@ -645,7 +652,20 @@ export default function ChatInterface({
                   ))}
                 </div>
               )}
-
+              <Button
+                type="submit"
+                size="icon"
+                variant="ghost"
+                className="group relative flex h-10 w-[3.5rem] items-center justify-center
+                rounded-full bg-gray-200
+                transition-all duration-200
+                ease-in-out
+                hover:bg-primary hover:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50 sm:w-[2.97rem]"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isLoading}
+              >
+                <Link className="h-4 w-4 rotate-90" />
+              </Button>
               <Textarea
                 ref={textareaRef}
                 value={input}
@@ -667,11 +687,30 @@ export default function ChatInterface({
                 onPaste={handlePaste}
                 placeholder="Send a message..."
                 className={cn(
-                  'min-h-[100px] w-full resize-none border-0 bg-transparent px-4 py-[1.3rem] focus-visible:ring-0',
+                  'h-[40px!important] min-h-[40px] w-full resize-none border-0 bg-transparent p-2 py-[0.5rem] shadow-none focus-visible:ring-0 sm:py-[0.6rem]',
                   attachments.length > 0 ? 'rounded-t-none' : 'rounded-t-md',
                 )}
                 maxLength={MAX_CHARS}
               />
+              <Button
+                type="submit"
+                size="icon"
+                disabled={
+                  (!input.trim() && attachments.length === 0) ||
+                  isLoading ||
+                  attachments.some((att) => att.uploading)
+                }
+                className="group relative flex h-10 w-28 items-center
+                justify-center
+                rounded-full bg-[#f57254]
+                text-white 
+                transition-all
+                duration-200 ease-in-out
+                active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Send
+                <ArrowUpRight className="h-4 w-4 transition-all duration-300 group-hover:rotate-45" />
+              </Button>
 
               <div className="absolute bottom-3 right-3 flex items-center gap-2">
                 <input
@@ -683,35 +722,10 @@ export default function ChatInterface({
                   onChange={handleFileSelect}
                   disabled={isLoading}
                 />
-
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-muted"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={isLoading}
-                >
-                  <ImageIcon className="h-5 w-5" />
-                </Button>
-
-                <Button
-                  type="submit"
-                  size="icon"
-                  variant="ghost"
-                  disabled={
-                    (!input.trim() && attachments.length === 0) ||
-                    isLoading ||
-                    attachments.some((att) => att.uploading)
-                  }
-                  className="h-8 w-8 hover:bg-muted"
-                >
-                  <SendHorizontal className="h-5 w-5" />
-                </Button>
               </div>
             </div>
 
-            <div className="text-xs text-muted-foreground">
+            <div className="absolute -top-9 right-4 text-xs text-muted-foreground">
               {input.length}/{MAX_CHARS}
             </div>
           </form>

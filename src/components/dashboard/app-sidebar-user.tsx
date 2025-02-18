@@ -13,7 +13,10 @@ export const AppSidebarUser = () => {
   return (
     <SidebarMenu>
       <SidebarMenuButton asChild>
-        <Button onClick={logout} className="d-flex justify-center">
+        <Button
+          onClick={logout}
+          className="d-flex h-10 justify-center rounded-full bg-gray-700 duration-300 hover:bg-gray-800 hover:text-white"
+        >
           <LogOut className="ml-2 h-4 w-4" />
           <span>Logout</span>
         </Button>
