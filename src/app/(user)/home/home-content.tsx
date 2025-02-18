@@ -172,7 +172,7 @@ export function HomeContent() {
         <div className="flex justify-center">
           <p className="max-w-[490px] text-center text-gray-400">
             Ready to assist you with anything you need, from answering questions
-            to providing recommendations, Let's get started!
+            to providing recommendations, Let{"'"}s get started!
           </p>
         </div>
       </BlurFade>
