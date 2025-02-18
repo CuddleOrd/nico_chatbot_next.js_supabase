@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -25,12 +25,12 @@ import { AppSidebarUser } from './app-sidebar-user';
 const AppSidebarHeader = () => {
   return (
     <SidebarHeader>
-      <div className="flex items-center justify-between px-1">
+      {/* <div className="flex items-center justify-between px-1">
         <span className="pl-2 text-lg font-medium tracking-tight group-data-[collapsible=icon]:hidden">
           NikoAi.com
         </span>
         <Image src="/logo.svg" alt={'logo'} width={28} height={28} />
-      </div>
+      </div> */}
     </SidebarHeader>
   );
 };
@@ -42,16 +42,6 @@ const AppSidebarFooter = () => {
     <SidebarFooter>
       {state !== 'collapsed' && (
         <>
-          <div className="mb-2 flex flex-col items-center justify-center gap-1 text-center text-xl">
-            <span>Powered by</span>{' '}
-            <Image
-              src="/integrations/deepseek.png"
-              alt={'deepseek'}
-              width={150}
-              height={24}
-              className="rounded-lg"
-            />
-          </div>
           <AppSidebarUser />
         </>
       )}
@@ -62,7 +52,7 @@ const AppSidebarFooter = () => {
 const ExploreItems = [
   {
     title: 'New Chat',
-    url: '/home',
+    url: '/',
     segment: 'home',
     icon: PlusIcon,
     external: false,
@@ -81,7 +71,7 @@ export function AppSidebar() {
 
   const getIsActive = (itemSegment: string) => {
     if (itemSegment === 'home') {
-      return pathname === '/home';
+      return pathname === '/';
     }
     return pathname.startsWith(`/${itemSegment}`);
   };
@@ -115,9 +105,9 @@ export function AppSidebar() {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
-                <SidebarMenuItem key={'Buy $NIKO'}>
+                {/* <SidebarMenuItem key={'Buy $NIKO'}>
                   <SidebarMenuButton asChild>
-                    <Link href={'/home'}>
+                    <Link href={'/'}>
                       <Image
                         src="/logo.svg"
                         alt={'logo'}
@@ -133,7 +123,7 @@ export function AppSidebar() {
                       </span>
                     </Link>
                   </SidebarMenuButton>
-                </SidebarMenuItem>
+                </SidebarMenuItem> */}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
