@@ -57,13 +57,6 @@ const ExploreItems = [
     icon: PlusIcon,
     external: false,
   },
-  {
-    title: 'Embedded Wallet',
-    url: '/wallet',
-    segment: 'wallet',
-    icon: WalletIcon,
-    external: false,
-  },
 ] as const;
 
 export function AppSidebar() {
