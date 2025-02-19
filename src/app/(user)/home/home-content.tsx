@@ -119,7 +119,7 @@ export function HomeContent() {
         <TypingAnimation
           className="bg-gradient-to-r from-gray-500 to-gray-500/70 bg-clip-text pb-2 text-center text-4xl font-semibold tracking-tight text-gray-400 text-transparent md:text-4xl lg:text-[2.6rem]"
           duration={50}
-          text="Hi, Nico"
+          text="Hi, there"
         />
         <TypingAnimation
           className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text pb-6 text-center text-4xl font-semibold tracking-tight text-transparent md:text-4xl lg:text-[2.6rem]"
