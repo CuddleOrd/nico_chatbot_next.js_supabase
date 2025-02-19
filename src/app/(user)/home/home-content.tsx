@@ -30,12 +30,11 @@ export function HomeContent() {
   const { user, isLoading } = useUser();
   const router = useRouter();
 
-  let { login } = useLogin({
+  const { login } = useLogin({
     onComplete: () => {
       router.refresh();
     },
   });
-  console.log(user);
 
   const { conversations, refreshConversations } = useConversations(user?.id);
 
