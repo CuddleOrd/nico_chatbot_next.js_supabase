@@ -9,24 +9,24 @@ import useSWR from 'swr';
 
 import { debugLog } from '@/lib/debug';
 import { getUserData } from '@/server/actions/user';
-import { NikoAiUser, PrismaUser, PrivyUser } from '@/types/db';
+import { HaloUser, PrismaUser, PrivyUser } from '@/types/db';
 
 /**
- * Extended interface for NikoAiUser that includes Privy functionality
+ * Extended interface for HaloUser that includes Privy functionality
  * Omits 'user' and 'ready' from PrivyInterface to avoid conflicts
  */
-type NikoAiUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
+type HaloUserInterface = Omit<PrivyInterface, 'user' | 'ready'> & {
   isLoading: boolean;
-  user: NikoAiUser | null;
+  user: HaloUser | null;
 };
 
 /**
- * Loads cached NikoAiUser data from localStorage
- * @returns {NikoAiUser | null} Cached user data or null if not found/invalid
+ * Loads cached HaloUser data from localStorage
+ * @returns {HaloUser | null} Cached user data or null if not found/invalid
  */
-function loadFromCache(): NikoAiUser | null {
+function loadFromCache(): HaloUser | null {
   try {
-    const cached = localStorage.getItem('nikoai-user-data');
+    const cached = localStorage.getItem('halo-user-data');
     if (cached) {
       debugLog('Loading user data from cache', cached, {
         module: 'useUser',
@@ -49,19 +49,19 @@ function loadFromCache(): NikoAiUser | null {
 }
 
 /**
- * Saves NikoAiUser data to localStorage
- * @param {NikoAiUser | null} data User data to cache or null to clear cache
+ * Saves HaloUser data to localStorage
+ * @param {HaloUser | null} data User data to cache or null to clear cache
  */
-function saveToCache(data: NikoAiUser | null) {
+function saveToCache(data: HaloUser | null) {
   try {
     if (data) {
-      localStorage.setItem('nikoai-user-data', JSON.stringify(data));
+      localStorage.setItem('halo-user-data', JSON.stringify(data));
       debugLog('User data saved to cache', data, {
         module: 'useUser',
         level: 'info',
       });
     } else {
-      localStorage.removeItem('nikoai-user-data');
+      localStorage.removeItem('halo-user-data');
       debugLog('User data removed from cache', null, {
         module: 'useUser',
         level: 'info',
@@ -76,13 +76,13 @@ function saveToCache(data: NikoAiUser | null) {
 }
 
 /**
- * Fetches NikoAiUser data from the server
+ * Fetches HaloUser data from the server
  * @param {PrivyUser} privyUser The authenticated Privy user
- * @returns {Promise<NikoAiUser | null>} User data or null if fetch fails
+ * @returns {Promise<HaloUser | null>} User data or null if fetch fails
  */
-async function fetchNikoAiUserData(
+async function fetchHaloUserData(
   privyUser: PrivyUser,
-): Promise<NikoAiUser | null> {
+): Promise<HaloUser | null> {
   try {
     const response = await getUserData();
     if (response?.data?.success && response?.data?.data) {
@@ -94,7 +94,7 @@ async function fetchNikoAiUserData(
       return {
         ...prismaUser,
         privyUser: privyUser as PrivyUser,
-      } as NikoAiUser;
+      } as HaloUser;
     }
     debugLog(
       'Server returned unsuccessful user data response',
@@ -115,13 +115,13 @@ async function fetchNikoAiUserData(
 }
 
 /**
- * Custom hook for managing NikoAiUser data fetching, caching, and synchronization
+ * Custom hook for managing HaloUser data fetching, caching, and synchronization
  * Combines Privy authentication with our user data management system
- * @returns {NikoAiUserInterface} Object containing user data, loading state, and Privy interface methods
+ * @returns {HaloUserInterface} Object containing user data, loading state, and Privy interface methods
  */
-export function useUser(): NikoAiUserInterface {
+export function useUser(): HaloUserInterface {
   const { ready, user: privyUser, ...privyRest } = usePrivy();
-  const [initialCachedUser, setInitialCachedUser] = useState<NikoAiUser | null>(
+  const [initialCachedUser, setInitialCachedUser] = useState<HaloUser | null>(
     null,
   );
   const router = useRouter();
@@ -138,9 +138,9 @@ export function useUser(): NikoAiUserInterface {
 
   /**
    * SWR fetcher function that combines server data with Privy user data
-   * @returns {Promise<NikoAiUser | null>} Combined user data or null
+   * @returns {Promise<HaloUser | null>} Combined user data or null
    */
-  const fetcher = useCallback(async (): Promise<NikoAiUser | null> => {
+  const fetcher = useCallback(async (): Promise<HaloUser | null> => {
     if (!ready || !privyUser) {
       debugLog('Privy not ready or user not logged in', null, {
         module: 'useUser',
@@ -150,18 +150,18 @@ export function useUser(): NikoAiUserInterface {
     }
 
     if (privyUser) {
-      debugLog('Fetching NikoAiUser data from server', null, {
+      debugLog('Fetching HaloUser data from server', null, {
         module: 'useUser',
         level: 'info',
       });
-      const nikoaiUser = await fetchNikoAiUserData(privyUser as PrivyUser);
-      debugLog('Merged NikoAiUser data', nikoaiUser, {
+      const haloUser = await fetchHaloUserData(privyUser as PrivyUser);
+      debugLog('Merged HaloUser data', haloUser, {
         module: 'useUser',
         level: 'info',
       });
-      return nikoaiUser;
+      return haloUser;
     }
-    debugLog('No valid NikoAiUser data retrieved', null, {
+    debugLog('No valid HaloUser data retrieved', null, {
       module: 'useUser',
       level: 'warn',
     });
@@ -169,22 +169,25 @@ export function useUser(): NikoAiUserInterface {
   }, [ready, privyUser]);
 
   // Use SWR for data fetching and state management
-  const { data: nikoaiUser, isValidating: swrLoading } =
-    useSWR<NikoAiUser | null>(swrKey, fetcher, {
+  const { data: haloUser, isValidating: swrLoading } = useSWR<HaloUser | null>(
+    swrKey,
+    fetcher,
+    {
       fallbackData: initialCachedUser,
       revalidateOnFocus: false,
       shouldRetryOnError: false,
-    });
+    },
+  );
 
-  debugLog('Current NikoAiUser data', nikoaiUser, { module: 'useUser' });
+  debugLog('Current HaloUser data', haloUser, { module: 'useUser' });
   debugLog('SWR validation status', swrLoading, { module: 'useUser' });
 
   // Update cache when new user data is fetched
   useEffect(() => {
-    if (nikoaiUser) {
-      saveToCache(nikoaiUser);
+    if (haloUser) {
+      saveToCache(haloUser);
     }
-  }, [nikoaiUser]);
+  }, [haloUser]);
 
   const isLoading = swrLoading && !initialCachedUser;
   debugLog('Loading state', { isLoading }, { module: 'useUser' });
@@ -220,8 +223,8 @@ export function useUser(): NikoAiUserInterface {
 
   return {
     ...privyRest,
-    isLoading: isLoading || nikoaiUser == null,
-    user: nikoaiUser || null,
+    isLoading: isLoading || haloUser == null,
+    user: haloUser || null,
     logout: extendedLogout,
   };
 }

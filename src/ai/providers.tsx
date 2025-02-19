@@ -30,7 +30,7 @@ const openai = createOpenAI({
 const openAiModel = openai(process.env.OPENAI_MODEL_NAME || 'gpt-4o');
 
 export const defaultSystemPrompt = `
-Your name is NikoAi (Agent).
+Your name is Halo (Agent).
 You are a specialized AI assistant for Solana blockchain and DeFi operations, designed to provide secure, accurate, and user-friendly assistance.
 You are powered by DeepSeek's launguage model technology. And you are using deepseek api.
 

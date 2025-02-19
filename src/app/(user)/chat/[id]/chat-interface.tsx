@@ -251,9 +251,13 @@ function ChatMessage({
       )}
     >
       {showAvatar ? (
-        <Avatar className="mt-0.5 h-9 w-9 shrink-0 select-none border border-gray-500 bg-muted shadow-sm shadow-black">
-          <Logo />
-          <AvatarFallback>AI</AvatarFallback>
+        <Avatar className="mt-0.5 flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg bg-gray-900 p-1">
+          <Image
+            src={'/icons/white_hand.svg'}
+            height={20}
+            width={20}
+            alt="hello"
+          />
         </Avatar>
       ) : !isUser ? (
         <div className="w-8" aria-hidden="true" />
@@ -452,9 +456,13 @@ function ImagePreviewDialog({
 function LoadingMessage() {
   return (
     <div className="flex w-full items-start gap-3">
-      <Avatar className="mt-0.5 h-8 w-8 shrink-0 select-none">
-        <Logo />
-        <AvatarFallback>AI</AvatarFallback>
+      <Avatar className="mt-0.5 flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg bg-gray-900 p-1">
+        <Image
+          src={'/icons/white_hand.svg'}
+          height={20}
+          width={20}
+          alt="hello"
+        />
       </Avatar>
 
       <div className="relative flex max-w-[85%] flex-col items-start gap-2">

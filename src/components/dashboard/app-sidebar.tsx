@@ -27,7 +27,7 @@ const AppSidebarHeader = () => {
     <SidebarHeader>
       {/* <div className="flex items-center justify-between px-1">
         <span className="pl-2 text-lg font-medium tracking-tight group-data-[collapsible=icon]:hidden">
-          NikoAi.com
+          Halo.com
         </span>
         <Image src="/logo.svg" alt={'logo'} width={28} height={28} />
       </div> */}

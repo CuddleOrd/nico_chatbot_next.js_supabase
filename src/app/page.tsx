@@ -33,9 +33,9 @@ export default function HomePage() {
         </>
       )}
 
-      <div className="w-full">
+      <main className="w-full">
         <HomeContent />
-      </div>
+      </main>
     </SidebarProvider>
   );
 }

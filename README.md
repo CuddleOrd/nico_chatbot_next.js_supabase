@@ -1,15 +1,15 @@
-# NikoAi
+# Halo
 
 > The Intelligent Copilot for Solana
 
-NikoAi is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, NikoAi enables seamless interactions with DeFi protocols, NFTs, and much more.
+Halo is an **open-source**, full-stack application that brings together the power of LLM models and blockchain technology. Designed for the [Solana](https://solana.com/) ecosystem, Halo enables seamless interactions with DeFi protocols, NFTs, and much more.
 
-[![GitHub stars](https://img.shields.io/github/stars/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/pulls)
-[![Last commit](https://img.shields.io/github/last-commit/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/commits/main)
-[![Contributors](https://img.shields.io/github/contributors/NikoAiProjects/nikoai-app?style=flat-square)](https://github.com/NikoAiProjects/nikoai-app/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/HaloProjects/halo-app?style=flat-square)](https://github.com/HaloProjects/halo-app/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/HaloProjects/halo-app/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/HaloProjects/halo-app?style=flat-square)](https://github.com/HaloProjects/halo-app/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/HaloProjects/halo-app?style=flat-square)](https://github.com/HaloProjects/halo-app/pulls)
+[![Last commit](https://img.shields.io/github/last-commit/HaloProjects/halo-app?style=flat-square)](https://github.com/HaloProjects/halo-app/commits/main)
+[![Contributors](https://img.shields.io/github/contributors/HaloProjects/halo-app?style=flat-square)](https://github.com/HaloProjects/halo-app/graphs/contributors)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
