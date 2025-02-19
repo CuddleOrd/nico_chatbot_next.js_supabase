@@ -1,62 +1,41 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-import { useLogin } from '@privy-io/react-auth';
-import { motion } from 'framer-motion';
+import { User } from 'lucide-react';
 
-import { AiParticlesBackground } from '@/components/ui/ai-particles-background';
+import { AppSidebar } from '@/components/dashboard/app-sidebar';
+import Hello from '@/components/hello';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { useUser } from '@/hooks/use-user';
 
-export default function Home() {
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-  const router = useRouter();
-  let { login } = useLogin({
-    onComplete: (
-      user,
-      isNewUser,
-      wasAlreadyAuthenticated,
-      loginMethod,
-      loginAccount,
-    ) => {
-      router.push('/home');
-    },
-  });
+import { HomeContent } from './(user)/home/home-content';
 
-  if (isMaintenanceMode) {
-    login = () => {
-      window.location.href = 'https://x.com/nikoai_sh';
-    };
-  }
+export default function HomePage() {
+  const { user } = useUser();
 
   return (
-    <div className="flex flex-col">
-      <AiParticlesBackground />
-      <main className="relative z-50 flex h-screen w-screen flex-col items-center justify-center gap-8">
-        <motion.div
-          className="text-center text-6xl font-bold"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          The Intelligent Copilot for Solana
-        </motion.div>
+    <SidebarProvider defaultOpen={false}>
+      <Hello />
 
-        <motion.button
-          className="hover:bg-black-700 focus:ring-black-300 rounded-md bg-black px-6 py-3 font-semibold text-white shadow-md focus:outline-none focus:ring"
-          onClick={login}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.5,
-            duration: 0.8,
-            ease: 'easeOut',
-          }}
-        >
-          Getting Started
-        </motion.button>
-      </main>
-    </div>
+      {user && (
+        <>
+          <SidebarTrigger className="absolute z-50 mb-0 rounded-full bg-[#611a4d29] duration-500 hover:bg-gray-700/90 hover:text-white" />
+
+          <AppSidebar />
+          <Link
+            href={'/account'}
+            className={`absolute right-3 top-3 z-50 mb-0 rounded-full bg-[#db9cc9] p-2 duration-500 hover:bg-gray-700/90 hover:text-white sm:bg-[#611a4d29]`}
+          >
+            <User />
+          </Link>
+        </>
+      )}
+
+      <div className="w-full">
+        <HomeContent />
+      </div>
+    </SidebarProvider>
   );
 }

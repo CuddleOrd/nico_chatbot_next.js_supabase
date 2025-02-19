@@ -91,7 +91,7 @@ const ConversationMenuItem = ({
       toast.success('Conversation deleted');
 
       // Navigate and refresh after successful deletion
-      router.replace('/home');
+      router.replace('/');
       router.refresh();
     } catch (error) {
       console.error('Error deleting conversation:', error);
@@ -185,7 +185,7 @@ export const AppSidebarConversations = () => {
     setActiveId(chatId);
   }, [pathname, setActiveId, conversations, refreshConversations]);
 
-  if (isUserLoading) {
+  if (user && isUserLoading) {
     return (
       <SidebarGroup>
         <SidebarGroupLabel>Histories</SidebarGroupLabel>
@@ -200,12 +200,14 @@ export const AppSidebarConversations = () => {
     <SidebarGroup>
       <SidebarGroupLabel>Histories</SidebarGroupLabel>
       <SidebarGroupContent>
-        {isConversationsLoading ? (
+        {user && isConversationsLoading ? (
           <div className="flex items-center justify-center">
             <Loader2 className="mt-4 h-4 w-4 animate-spin" />
           </div>
-        ) : !conversations?.length ? (
-          <p className="ml-2 text-xs text-muted-foreground">No conversations</p>
+        ) : !user || !conversations?.length ? (
+          <p className="ml-2 text-xs text-muted-foreground">
+            {!user ? 'Not authenticated' : 'No conversations'}
+          </p>
         ) : (
           <SidebarMenu>
             {conversations.map((conversation: Conversation) => (

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -51,7 +51,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="overflow-hidden md:overflow-visible">
+            <main className="overflow-hidden ">
               {children}
               <Toaster />
             </main>

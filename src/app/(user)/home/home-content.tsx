@@ -4,10 +4,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
+import { useLogin } from '@privy-io/react-auth';
 import { useChat } from 'ai/react';
-import { Hand, Loader2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 
 import ChatInterface from '@/app/(user)/chat/[id]/chat-interface';
@@ -16,23 +17,10 @@ import TypingAnimation from '@/components/ui/typing-animation';
 import { useConversations } from '@/hooks/use-conversations';
 import { useUser } from '@/hooks/use-user';
 import { cn } from '@/lib/utils';
-import { checkEAPTransaction } from '@/server/actions/eap';
 
 import { ConversationInput } from './conversation-input';
 import { getRandomSuggestions } from './data/suggestions';
 import { SuggestionCard } from './suggestion-card';
-
-interface SectionTitleProps {
-  children: React.ReactNode;
-}
-
-function SectionTitle({ children }: SectionTitleProps) {
-  return (
-    <h2 className="mb-2 px-1 text-sm font-medium text-muted-foreground/80">
-      {children}
-    </h2>
-  );
-}
 
 export function HomeContent() {
   const pathname = usePathname();
@@ -40,9 +28,13 @@ export function HomeContent() {
   const [showChat, setShowChat] = useState(false);
   const [chatId, setChatId] = useState(() => uuidv4());
   const { user, isLoading } = useUser();
-  const [verifyingTx, setVerifyingTx] = useState<string | null>(null);
-  const [verificationAttempts, setVerificationAttempts] = useState(0);
-  const MAX_VERIFICATION_ATTEMPTS = 20;
+  const router = useRouter();
+
+  const { login } = useLogin({
+    onComplete: () => {
+      router.refresh();
+    },
+  });
 
   const { conversations, refreshConversations } = useConversations(user?.id);
 
@@ -63,48 +55,13 @@ export function HomeContent() {
     },
   });
 
-  // Verification effect
-  useEffect(() => {
-    if (!verifyingTx) return;
-
-    const verify = async () => {
-      try {
-        const response = await checkEAPTransaction({ txHash: verifyingTx });
-        if (response?.data?.success) {
-          toast.success('EAP Purchase Successful', {
-            description:
-              'Your Early Access Program purchase has been verified. Please refresh the page.',
-          });
-          setVerifyingTx(null);
-          return;
-        }
-
-        // Continue verification if not reached max attempts
-        if (verificationAttempts < MAX_VERIFICATION_ATTEMPTS) {
-          setVerificationAttempts((prev) => prev + 1);
-        } else {
-          // Max attempts reached, show manual verification message
-          toast.error('Verification Timeout', {
-            description:
-              'Please visit the FAQ page to manually verify your transaction.',
-          });
-          setVerifyingTx(null);
-        }
-      } catch (error) {
-        console.error('Verification error:', error);
-        // Continue verification if not reached max attempts
-        if (verificationAttempts < MAX_VERIFICATION_ATTEMPTS) {
-          setVerificationAttempts((prev) => prev + 1);
-        }
-      }
-    };
-
-    const timer = setTimeout(verify, 3000);
-    return () => clearTimeout(timer);
-  }, [verifyingTx, verificationAttempts]);
-
   const handleSend = async (value: string) => {
     if (!value.trim()) return;
+
+    if (!user) {
+      login();
+      return;
+    }
 
     const fakeEvent = new Event('submit') as any;
     fakeEvent.preventDefault = () => {};
@@ -116,7 +73,7 @@ export function HomeContent() {
 
   // Reset chat when pathname changes to /home
   useEffect(() => {
-    if (pathname === '/home') {
+    if (pathname === '/') {
       resetChat();
     }
   }, [pathname, resetChat]);
@@ -124,7 +81,7 @@ export function HomeContent() {
   // 监听浏览器的前进后退
   useEffect(() => {
     const handlePopState = () => {
-      if (location.pathname === '/home') {
+      if (location.pathname === '/') {
         resetChat();
       } else if (location.pathname === `/chat/${chatId}`) {
         setShowChat(true);
@@ -135,7 +92,7 @@ export function HomeContent() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [chatId, resetChat]);
 
-  if (isLoading) {
+  if (user && isLoading) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
